@@ -1,0 +1,30 @@
+Console Interface Workflow:
+• Prompt for Moves: Create an interface loop that repeatedly displays the board's
+current state and prompts the user to enter their move in standard chess
+notation.
+• Move Input: Accept and parse the player's input to determine the source and
+destination squares for the intended move.
+• Basic Validation: For this phase, implement a simple validation check to ensure
+the entered move is in the correct format (e.g., "E2 E4")
+
+User Interface Workflow:
+• Display the current state of the chessboard.
+• Indicate which player's turn it is.
+• Prompt the player to enter their move.
+• Validate the move. If it's valid, update the board and switch turns. If not, display an error
+message and prompt for a move again.
+• After each move, check for game-ending conditions like checkmate or stalemate
+
+Making Moves with Standard Chess Notation:
+Players will make moves by typing them into the console using standard chess notation. The
+basic format will be [FROM] space [TO].
+• Moving a Piece: Specify the starting square followed by the destination square. E.g., "E2
+E4" moves the piece from square E2 to E4.
+• Capture: The same as moving a piece. The capturing move can be automatically
+identified by the program when a piece moves to a square occupied by an opponent's
+piece.
+• Castling: Use "O-O" for kingside (short) castling and "O-O-O" for queenside (long)
+castling. (optional)
+• Pawn Promotion: When a pawn reaches the opposite end of the board, the player can
+choose a piece for promotion. This can be represented as "E7 E8=Q" to promote a pawn
+moving from E7 to E8 into a Queen. (optional)

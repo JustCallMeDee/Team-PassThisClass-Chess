@@ -1,0 +1,26 @@
+Board Implementation:
+• Board Representation: The Board class should maintain an 8x8 matrix (or
+another appropriate data structure) to represent the chessboard. Each element
+should store a reference to a Piece or be null if the square is empty.
+• Initialization: Implement a method to set up the board with pieces in their iniLal
+positions.
+• Display Method: The board should have a method to display its current state in
+the console.
+
+1. Text-Based Chessboard Display:
+The chessboard will be represented using a grid of characters in the console. It will be 8x8
+squares in size, as per standard chess rules.
+• Squares: Each square can be represented by two pound signs (e.g., "##")
+• Board Coordinates: The horizontal (file) coordinates should be labeled with letters 'A'
+through 'H' and the vertical (rank) coordinates with numbers '1' through '8'. These labels
+should be displayed on the top and left side of the board to help players idenify each
+square's position.
+2. Text Representation of Chess Pieces:
+Different pieces can be represented using letters uppercase or lowercase, white pieces start
+with ‘w’ and black pieces start with ‘b’.
+Pawn: wp (white), bp (black)
+Rook: wR (white), bR (black)
+Knight: wN (white), bN (black)
+Bishop: wB (white), bB (black)
+Queen: wQ (white), bQ (black)
+King: wK (white), bK (black)
