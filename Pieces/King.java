@@ -27,8 +27,36 @@ public class King extends Piece{
 
     @Override
     public ArrayList<Position> possibleMoves() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'possibleMoves'");
+        ArrayList<Position> positions = new ArrayList<Position>();
+
+        int row = this.getPosition().getRow();
+        char column = this.getPosition().getColumn();
+
+        for(int i = row-1; i<row+1; i++){
+            for(char j = (char)(column-1); j < (char)(column+1); j++){
+                Position check = new Position(i, j);
+
+                //Check every condition that would invalidate the move.
+                //If it is invalid, skip this itteration of the loop  
+                if(!Position.isValid(check)){
+                    continue;
+                }
+                if(check.getRow() == this.getPosition().getRow()
+                        && check.getColumn() == this.getPosition().getColumn()){
+                    continue;
+                }
+                /*
+                Unimplemented:
+                    Check that this will not land on the same space as a same-color piece
+                    or that it will leave the king in check. Likely leave this to the 
+                    Board class.
+                */
+
+                positions.add(check);
+            }
+        }
+        
+        return positions;
     }
     
 }
