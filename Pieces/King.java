@@ -5,10 +5,24 @@ import java.util.ArrayList;
 import Board.Position;
 
 public class King extends Piece{
+    private boolean hasMoved = false;
 
     public King(Position pos) {
         super(pos);
         //TODO Auto-generated constructor stub
+    }
+
+    public boolean getHasMoved(){
+        return hasMoved;
+    }
+    
+    @Override
+    public boolean move(Position newPos){
+        boolean successful = super.move(newPos);
+        if(successful){
+            hasMoved = true;
+        }
+        return successful;
     }
 
     @Override
