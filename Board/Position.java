@@ -5,7 +5,7 @@ public class Position {
     private char column;
 
     //Todo: Add a more debugable input detection
-    public Position(int row, char column){
+    public Position(int row, char column) throws IllegalArgumentException{
         this.row = row;
         this.column = column;
 
