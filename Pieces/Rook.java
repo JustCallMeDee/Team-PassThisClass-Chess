@@ -15,7 +15,7 @@ public class Rook extends Piece{
     public boolean getHasMoved(){
         return hasMoved;
     }
-    
+
     @Override
     public boolean move(Position newPos){
         boolean successful = super.move(newPos);
@@ -26,8 +26,74 @@ public class Rook extends Piece{
     }
     @Override
     public ArrayList<Position> possibleMoves() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'possibleMoves'");
+        ArrayList<Position> positions = new ArrayList<Position>();
+        Position check;
+        boolean capture = false;
+        //Check all forizontal moves to the right. When one position is invalid, stop the loop 
+        for(int i = this.getPosition().getRow() + 1; i <= this.getPosition().getRow() + 8; i++){
+            try {
+                check = new Position(i, this.getPosition().getColumn());
+                //Check board state
+                //Check if there is a capture
+                positions.add(check);
+                if(capture){
+                    break;
+                }
+            } catch (Exception e) {
+                break;
+            }
+        }
+        
+        capture = false;
+        //Next loops is for horizontal to the left, then vertical up and down
+        for(int i = this.getPosition().getRow() - 1; i >= this.getPosition().getRow() - 8; i--){
+            try {
+                check = new Position(i, this.getPosition().getColumn());
+                //Check board state
+                //Check if there is a capture
+                positions.add(check);
+                if(capture){
+                    break;
+                }
+            } catch (Exception e) {
+                break;
+            }
+        }
+
+        capture = false;
+        for(int j = this.getPosition().getColumn() + 1; j <= this.getPosition().getColumn() + 8; j++){
+            try {
+                check = new Position(this.getPosition().getRow(), j);
+                //Check board state
+                //Check if there is a capture
+                positions.add(check);
+                if(capture){
+                    break;
+                }
+            } catch (Exception e) {
+                break;
+            }
+        }
+
+        capture = false;
+        for(int j = this.getPosition().getColumn() - 1; j >= this.getPosition().getColumn() - 8; j--){
+            try {
+                check = new Position(this.getPosition().getRow(), j);
+                //Check board state
+                //Check if there is a capture
+                positions.add(check);
+                if(capture){
+                    break;
+                }
+            } catch (Exception e) {
+                break;
+            }
+        }
+
+
+        return positions;
     }
+
+
     
 }
