@@ -50,4 +50,18 @@ public class Position {
 
         return true;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        try {
+            Position p = (Position)(obj);
+            if(this.row == p.getRow() && this.column == p.getColumn()){
+                return true;
+            }
+            return false;
+        } catch (Exception e) {
+            return super.equals(obj);
+        }
+
+    }
 }
