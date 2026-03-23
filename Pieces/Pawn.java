@@ -37,7 +37,7 @@ public class Pawn extends Piece{
             if(getPlayer().findPieceAt(check) == null){
                 throw new IllegalArgumentException();
             }
-            //Check if this leaves them in check
+            //TODO: Check if this leaves them in check
             positions.add(check);
         }
         catch (IllegalArgumentException e){
@@ -50,7 +50,7 @@ public class Pawn extends Piece{
                 if(getPlayer().findPieceAt(check) == null){
                     throw new IllegalArgumentException();
                 }                
-                //Check if this leaves them in check
+                //TODO: Check if this leaves them in check
                 positions.add(check);
             }
             catch (IllegalArgumentException e){
@@ -67,13 +67,13 @@ public class Pawn extends Piece{
         //Since a piece already occupies the spaces we are checking, only need to check if king is in check
         if(pieceLeft){
             check = new Position(this.getPosition().getRow() + 1, this.getPosition().getColumn() - 1);
-            //Check if check
+            //TODO: Check if check
             positions.add(check);
         }
 
         if(pieceRight){
             check = new Position(this.getPosition().getRow() + 1, this.getPosition().getColumn() + 1);
-            //Check if check
+            //TODO: Check if check
             positions.add(check);
         }
 
