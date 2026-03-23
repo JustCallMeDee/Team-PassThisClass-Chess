@@ -25,35 +25,37 @@ public class Player {
     }
 
     public Player(Color color){
-        this(color, createStandardBoard(color));
+        this.color = color;
+        pieces = createStandardPieceSetup(color);
+        king = (King)pieces.get(0);
     }
 
-    private static ArrayList<Piece> createStandardBoard(Color color) {
+    private ArrayList<Piece> createStandardPieceSetup(Color color) {
         ArrayList<Piece> board = new ArrayList<Piece>();
         if(color == Color.White){
-            board.add(new King(new Position(1, 'E')));
-            board.add(new Queen(new Position(1, 'D')));
-            board.add(new Bishop(new Position(1, 'C')));
-            board.add(new Bishop(new Position(1, 'F')));
-            board.add(new Knight(new Position(1, 'B')));
-            board.add(new Knight(new Position(1, 'G')));
-            board.add(new Rook(new Position(1, 'A')));
-            board.add(new Rook(new Position(1, 'H')));
+            board.add(new King(this, new Position(1, 'E')));
+            board.add(new Queen(this, new Position(1, 'D')));
+            board.add(new Bishop(this, new Position(1, 'C')));
+            board.add(new Bishop(this, new Position(1, 'F')));
+            board.add(new Knight(this, new Position(1, 'B')));
+            board.add(new Knight(this, new Position(1, 'G')));
+            board.add(new Rook(this, new Position(1, 'A')));
+            board.add(new Rook(this, new Position(1, 'H')));
             for(char i = 'A'; i <= 'H'; i++){
-                board.add(new Pawn(new Position(2, i)));
+                board.add(new Pawn(this, new Position(2, i)));
             }
         }
         else{
-            board.add(new King(new Position(8, 'E')));
-            board.add(new Queen(new Position(8, 'D')));
-            board.add(new Bishop(new Position(8, 'C')));
-            board.add(new Bishop(new Position(8, 'F')));
-            board.add(new Knight(new Position(8, 'B')));
-            board.add(new Knight(new Position(8, 'G')));
-            board.add(new Rook(new Position(8, 'A')));
-            board.add(new Rook(new Position(8, 'H')));
+            board.add(new King(this, new Position(8, 'E')));
+            board.add(new Queen(this, new Position(8, 'D')));
+            board.add(new Bishop(this, new Position(8, 'C')));
+            board.add(new Bishop(this, new Position(8, 'F')));
+            board.add(new Knight(this, new Position(8, 'B')));
+            board.add(new Knight(this, new Position(8, 'G')));
+            board.add(new Rook(this, new Position(8, 'A')));
+            board.add(new Rook(this, new Position(8, 'H')));
             for(char i = 'A'; i <= 'H'; i++){
-                board.add(new Pawn(new Position(7, i)));
+                board.add(new Pawn(this, new Position(7, i)));
             }
         }
 

@@ -1,14 +1,14 @@
 package Pieces;
 
 import java.util.ArrayList;
-
+import Player.Player;
 import Board.Position;
 
 public class Pawn extends Piece{
     private boolean hasMoved = false;
 
-    public Pawn(Position pos) {
-        super(pos);
+    public Pawn(Player player, Position pos) {
+        super(player, pos);
         //TODO Auto-generated constructor stub
     }
 
@@ -34,12 +34,10 @@ public class Pawn extends Piece{
         Position check;
         try{
             check = new Position(this.getPosition().getRow() + 1, this.getPosition().getColumn());
-            /*
-            Unimplemented:
-                Check that this will not land on the same space as a same-color piece
-                or that it will leave the king in check. Likely leave this to the 
-                Board class.
-            */
+            if(getPlayer().findPieceAt(check) == null){
+                throw new IllegalArgumentException();
+            }
+            //Check if this leaves them in check
             positions.add(check);
         }
         catch (IllegalArgumentException e){
@@ -49,12 +47,10 @@ public class Pawn extends Piece{
         if(!hasMoved){
             try{
                 check = new Position(this.getPosition().getRow() + 2, this.getPosition().getColumn());
-                /*
-                Unimplemented:
-                    Check that this will not land on the same space as a same-color piece
-                    or that it will leave the king in check. Likely leave this to the 
-                    Board class.
-                */
+                if(getPlayer().findPieceAt(check) == null){
+                    throw new IllegalArgumentException();
+                }                
+                //Check if this leaves them in check
                 positions.add(check);
             }
             catch (IllegalArgumentException e){

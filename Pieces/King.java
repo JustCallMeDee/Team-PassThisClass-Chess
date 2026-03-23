@@ -3,12 +3,13 @@ package Pieces;
 import java.util.ArrayList;
 
 import Board.Position;
+import Player.Player;
 
 public class King extends Piece{
     private boolean hasMoved = false;
 
-    public King(Position pos) {
-        super(pos);
+    public King(Player player, Position pos) {
+        super(player, pos);
         //TODO Auto-generated constructor stub
     }
 

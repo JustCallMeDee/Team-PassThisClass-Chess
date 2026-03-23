@@ -3,11 +3,12 @@ package Pieces;
 import java.util.ArrayList;
 
 import Board.Position;
+import Player.Player;
 
 public class Queen extends Piece{
 
-    public Queen(Position pos) {
-        super(pos);
+    public Queen(Player player, Position pos) {
+        super(player, pos);
         //TODO Auto-generated constructor stub
     }
 

@@ -1,14 +1,14 @@
 package Pieces;
 
 import java.util.ArrayList;
-
+import Player.Player;
 import Board.Position;
 
 public class Rook extends Piece{
     private boolean hasMoved = false;
 
-    public Rook(Position pos) {
-        super(pos);
+    public Rook(Player player, Position pos) {
+        super(player, pos);
         //TODO Auto-generated constructor stub
     }
 
