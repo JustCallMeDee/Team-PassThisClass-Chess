@@ -1,8 +1,9 @@
-package board;
+package Board;
 
-import pieces.*;
-import player.*;
-import java.util.*;
+import Pieces.*;
+import Player.*;
+import Utils.Color;
+//import java.util.*;
 
 public class Board {
     private Piece[][] board;
@@ -22,42 +23,42 @@ public class Board {
 
     public void initializeBoard() {
         for (int col = 0; col < 8; col++) {
-            Pawn whitePawn = new Pawn(Color.WHITE, new Position(6, col));
-            Pawn blackPawn = new Pawn(Color.BLACK, new Position(1, col));
+            Pawn whitePawn = new Pawn(whitePlayer, new Position(6, col));
+            Pawn blackPawn = new Pawn(blackPlayer, new Position(1, col));
             placeAndAdd(whitePawn, whitePlayer);
             placeAndAdd(blackPawn, blackPlayer);
         }
 
-        placeAndAdd(new Rook(Color.WHITE, new Position(7, 0)), whitePlayer);
-        placeAndAdd(new Rook(Color.WHITE, new Position(7, 7)), whitePlayer);
-        placeAndAdd(new Rook(Color.BLACK, new Position(0, 0)), blackPlayer);
-        placeAndAdd(new Rook(Color.BLACK, new Position(0, 7)), blackPlayer);
+        placeAndAdd(new Rook(whitePlayer, new Position(7, 0)), whitePlayer);
+        placeAndAdd(new Rook(whitePlayer, new Position(7, 7)), whitePlayer);
+        placeAndAdd(new Rook(blackPlayer, new Position(0, 0)), blackPlayer);
+        placeAndAdd(new Rook(blackPlayer, new Position(0, 7)), blackPlayer);
 
-        placeAndAdd(new Knight(Color.WHITE, new Position(7, 1)), whitePlayer);
-        placeAndAdd(new Knight(Color.WHITE, new Position(7, 6)), whitePlayer);
-        placeAndAdd(new Knight(Color.BLACK, new Position(0, 1)), blackPlayer);
-        placeAndAdd(new Knight(Color.BLACK, new Position(0, 6)), blackPlayer);
+        placeAndAdd(new Knight(whitePlayer, new Position(7, 1)), whitePlayer);
+        placeAndAdd(new Knight(whitePlayer, new Position(7, 6)), whitePlayer);
+        placeAndAdd(new Knight(whitePlayer, new Position(0, 1)), blackPlayer);
+        placeAndAdd(new Knight(whitePlayer, new Position(0, 6)), blackPlayer);
 
-        placeAndAdd(new Bishop(Color.WHITE, new Position(7, 2)), whitePlayer);
-        placeAndAdd(new Bishop(Color.WHITE, new Position(7, 5)), whitePlayer);
-        placeAndAdd(new Bishop(Color.BLACK, new Position(0, 2)), blackPlayer);
-        placeAndAdd(new Bishop(Color.BLACK, new Position(0, 5)), blackPlayer);
+        placeAndAdd(new Bishop(whitePlayer, new Position(7, 2)), whitePlayer);
+        placeAndAdd(new Bishop(whitePlayer, new Position(7, 5)), whitePlayer);
+        placeAndAdd(new Bishop(blackPlayer, new Position(0, 2)), blackPlayer);
+        placeAndAdd(new Bishop(blackPlayer, new Position(0, 5)), blackPlayer);
 
-        placeAndAdd(new Queen(Color.WHITE, new Position(7, 3)), whitePlayer);
-        placeAndAdd(new Queen(Color.BLACK, new Position(0, 3)), blackPlayer);
+        placeAndAdd(new Queen(whitePlayer, new Position(7, 3)), whitePlayer);
+        placeAndAdd(new Queen(blackPlayer, new Position(0, 3)), blackPlayer);
 
-        placeAndAdd(new King(Color.WHITE, new Position(7, 4)), whitePlayer);
-        placeAndAdd(new King(Color.BLACK, new Position(0, 4)), blackPlayer);
+        placeAndAdd(new King(whitePlayer, new Position(7, 4)), whitePlayer);
+        placeAndAdd(new King(blackPlayer, new Position(0, 4)), blackPlayer);
     }
 
     private void placePiece(Piece piece) {
         Position pos = piece.getPosition();
-        board[pos.getRow()][pos.getCol()] = piece;
+        board[pos.getRow()][pos.getColumn()] = piece;
     }
 
     private void placeAndAdd(Piece piece, Player player) {
         placePiece(piece);
-        piece.setPosition(piece.getPosition());
+        piece.move(piece.getPosition());
         player.addPiece(piece);
     }
 
@@ -74,7 +75,7 @@ public class Board {
     }
 
     public Piece getPiece(Position pos) {
-        return board[pos.getRow()][pos.getCol()];
+        return board[pos.getRow()][pos.getColumn()];
     }
 
     public boolean movePiece(Position start, Position end) {
@@ -84,15 +85,15 @@ public class Board {
         Piece target = getPiece(end);
         if (target != null && target.getColor() == piece.getColor()) return false;
 
-        board[start.getRow()][start.getCol()] = null;
+        board[start.getRow()][start.getColumn()] = null;
 
         if (target != null) {
             if (target.getColor() == Color.WHITE) whitePlayer.capturePiece(end);
             else blackPlayer.capturePiece(end);
         }
 
-        piece.setPosition(end);
-        board[end.getRow()][end.getCol()] = piece;
+        piece.move(end);
+        board[end.getRow()][end.getColumn()] = piece;
 
         if (piece.getColor() == Color.WHITE) whitePlayer.makeMove(start, end);
         else blackPlayer.makeMove(start, end);
