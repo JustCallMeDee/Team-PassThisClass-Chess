@@ -1,0 +1,7 @@
+3. Player
+Attributes:
+• Color (white or black)
+• List of available pieces (those that have not been captured)
+Methods:
+• makeMove(): Allows the player to input a move and attempts to execute it on the
+board.
