@@ -5,7 +5,12 @@ import java.util.ArrayList;
 import Player.Color;
 import Player.Player;
 import Board.Position;
-
+/**
+ * Represents a rook piece from a chess board
+ * 
+ * @author Dee Quinn
+ * @see {@link Piece}
+ */
 public class Rook extends Piece{
     private boolean hasMoved = false;
 
