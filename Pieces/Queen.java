@@ -3,7 +3,7 @@ package Pieces;
 import java.util.ArrayList;
 
 import Board.Position;
-import Player.Color;
+import Utils.Color;
 import Player.Player;
 /**
  * Represents a queen piece from a chess board
@@ -176,7 +176,7 @@ public class Queen extends Piece{
 
     @Override
     public String toString(){
-        if(getColor() == Color.White){
+        if(getColor() == Color.WHITE){
             return "wQ";
         }
         

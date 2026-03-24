@@ -1,5 +1,6 @@
 package Player;
 
+import Utils.Color;
 import Pieces.*;
 import Board.Position;
 import java.util.ArrayList;
@@ -39,7 +40,7 @@ public class Player {
      */
     private ArrayList<Piece> createStandardPieceSetup(Color color) {
         ArrayList<Piece> board = new ArrayList<Piece>();
-        if(color == Color.White){
+        if(color == Color.WHITE){
             board.add(new King(this, new Position(1, 'E')));
             board.add(new Queen(this, new Position(1, 'D')));
             board.add(new Bishop(this, new Position(1, 'C')));

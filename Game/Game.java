@@ -1,22 +1,19 @@
-package game;
+package Game;
 
 import java.util.Scanner;
 
-import board.Board;
-import utils.Color;
-import utils.Position;
-import utils.Utils;
+import Board.Board;
+import Utils.Color;
+import Utils.Position;
+import Utils.Utils;
+import Player.Player;
 
 public class Game {
     private Board board;
-    private Player whitePlayer;
-    private Player blackPlayer;
     private Color currentTurn;
 
     public Game() {
         board = new Board();
-        whitePlayer = new Player(Color.WHITE);
-        blackPlayer = new Player(Color.BLACK);
         currentTurn = Color.WHITE;
     }
 
@@ -29,7 +26,7 @@ public class Game {
         System.out.println("Type EXIT (all caps) to quit/terminate.");
 
         while (running){
-            board.display();
+            System.out.println(board.toString());
             System.out.println(currentTurn + "'s turn.");
             System.out.print("Enter your move: ");
 
@@ -54,7 +51,7 @@ public class Game {
                 System.out.println("Invalid board position.");
                 continue;
             }
-            boolean moved = board.movePiece(from, to, currentTurn);
+            boolean moved = board.movePiece(from, to);
 
             if (moved){
                 currentTurn = (currentTurn == Color.WHITE) ? Color.BLACK : Color.WHITE;
