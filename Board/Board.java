@@ -6,19 +6,14 @@ import Utils.Color;
 //import java.util.*;
 
 public class Board {
-    private Piece[][] board;
+    private Position[][] board;
     private Player whitePlayer;
     private Player blackPlayer;
+    public void initializeBoard() {
 
-    public Board(Player whitePlayer, Player blackPlayer) {
-        this.whitePlayer = whitePlayer;
-        this.blackPlayer = blackPlayer;
-        this.board = new Piece[8][8];
-    }
-
-    public Board() {
-        this(new Player(Color.WHITE), new Player(Color.BLACK));
-        initializeBoard();
+    for (int col = 0; col < 8; col++) {
+        whitePlayer.addPiece(new Pawn(Color.White, new Position(6, col)));
+        blackPlayer.addPiece(new Pawn(Color.Black, new Position(1, col)));
     }
 
     public void initializeBoard() {
@@ -62,68 +57,95 @@ public class Board {
         player.addPiece(piece);
     }
 
-    public Player getPlayer(Color color) {
-        return (color == Color.WHITE) ? whitePlayer : blackPlayer;
+    public Player getPlayer(Color color){
+        if(color == Color.White){
+            return getWhitePlayer();
+        }
+        else{
+            return getBlackPlayer();
+        }
     }
 
-    public Player getWhitePlayer() {
+    public Player getWhitePlayer(){
         return whitePlayer;
     }
 
-    public Player getBlackPlayer() {
+    public Player getBlackPlayer(){
         return blackPlayer;
     }
 
-    public Piece getPiece(Position pos) {
-        return board[pos.getRow()][pos.getColumn()];
+    public Piece getPiece(Position pos){
+        Piece p = whitePlayer.findPieceAt(pos);
+        if(p == null){
+            p = blackPlayer.findPieceAt(pos);
+        }
+        return p;
     }
 
-    public boolean movePiece(Position start, Position end) {
-        Piece piece = getPiece(start);
-        if (piece == null) return false;
+   public boolean movePiece(Position start, Position end){
+      Piece piece = getPiece(start);
+      
+      if(piece == null){
+            return false;
+        }
 
         Piece target = getPiece(end);
-        if (target != null && target.getColor() == piece.getColor()) return false;
 
-        board[start.getRow()][start.getColumn()] = null;
-
-        if (target != null) {
-            if (target.getColor() == Color.WHITE) whitePlayer.capturePiece(end);
-            else blackPlayer.capturePiece(end);
+    if(piece.getColor() == Color.White){
+        whitePlayer.makeMove(start, end);
+        if(target != null && target.getColor() == Color.Black){
+            blackPlayer.capturePiece(end);
         }
-
-        piece.move(end);
-        board[end.getRow()][end.getColumn()] = piece;
-
-        if (piece.getColor() == Color.WHITE) whitePlayer.makeMove(start, end);
-        else blackPlayer.makeMove(start, end);
-
-        return true;
+    } else {
+        blackPlayer.makeMove(start, end);
+        if(target != null && target.getColor() == Color.White){
+            whitePlayer.capturePiece(end);
+        }
     }
 
-    public boolean isCheck(Color color) {
+    return true;
+}
+
+    public boolean isCheck(){
         return false;
     }
 
-    public boolean isCheck(Position moveStart, Position moveEnd) {
+    public boolean isCheck(Position moveStart, Position moveEnd){
         return false;
     }
 
-    public boolean isCheckmate(Color color) {
-        return false;
+    public boolean isCheckmate(){
+        if(!isCheck()){
+            return false;
+        }
+        else{
+            return false;
+        }
     }
 
-    public void display() {
-        System.out.println("  A  B  C  D  E  F  G  H");
-        for (int row = 0; row < 8; row++) {
-            int displayRow = 8 - row;
-            System.out.print(displayRow + " ");
-            for (int col = 0; col < 8; col++) {
-                Piece piece = board[row][col];
-                if (piece != null) System.out.print(piece.toString() + " ");
-                else System.out.print("## ");
+    @Override
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+
+    sb.append("  A  B  C  D  E  F  G  H\n");
+
+    for (int row = 0; row < 8; row++) {
+        int displayRow = 8 - row;
+        sb.append(displayRow + " ");
+
+        for (int col = 0; col < 8; col++) {
+            Position pos = board[row][col];
+            Piece piece = getPiece(pos);
+
+            if (piece != null) {
+                sb.append(piece.toString() + " ");
+            } else {
+                sb.append("## ");
             }
-            System.out.println();
         }
+        sb.append("\n");
     }
+
+    return sb.toString();
+}
 }
