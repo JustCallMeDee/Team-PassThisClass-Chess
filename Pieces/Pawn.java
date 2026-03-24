@@ -1,7 +1,8 @@
 package Pieces;
 
 import java.util.ArrayList;
-import Player.*;
+import Player.Player;
+import Utils.Color;
 import Board.Position;
 /**
  * Represents a pawn piece from a chess board
@@ -95,7 +96,7 @@ public class Pawn extends Piece{
 
     @Override
     public String toString(){
-        if(getColor() == Color.White){
+        if(getColor() == Color.WHITE){
             return "wP";
         }
         

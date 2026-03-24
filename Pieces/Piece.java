@@ -2,7 +2,7 @@ package Pieces;
 
 import Board.Position;
 import Player.Player;
-import Player.Color;
+import Utils.Color;
 import java.util.ArrayList;
 
 /**
