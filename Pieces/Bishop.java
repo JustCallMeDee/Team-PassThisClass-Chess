@@ -3,9 +3,14 @@ package Pieces;
 import java.util.ArrayList;
 
 import Board.Position;
-import Player.Color;
+import Utils.Color;
 import Player.Player;
-
+/**
+ * Represents a bishop piece from a chess board
+ * 
+ * @author Dee Quinn
+ * @see {@link Piece}
+ */
 public class Bishop extends Piece{
 
     public Bishop(Player player, Position pos) {
@@ -100,7 +105,7 @@ public class Bishop extends Piece{
     
     @Override
     public String toString(){
-        if(getColor() == Color.White){
+        if(getColor() == Color.WHITE){
             return "wB";
         }
         
