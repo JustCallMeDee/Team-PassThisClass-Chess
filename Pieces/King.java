@@ -3,9 +3,14 @@ package Pieces;
 import java.util.ArrayList;
 
 import Board.Position;
-import Player.Color;
+import Utils.Color;
 import Player.Player;
-
+/**
+ * Represents a king piece from a chess board
+ * 
+ * @author Dee Quinn
+ * @see {@link Piece}
+ */
 public class King extends Piece{
     private boolean hasMoved = false;
 
@@ -62,7 +67,7 @@ public class King extends Piece{
     
     @Override
     public String toString(){
-        if(getColor() == Color.White){
+        if(getColor() == Color.WHITE){
             return "wK";
         }
         

@@ -3,9 +3,14 @@ package Pieces;
 import java.util.ArrayList;
 
 import Board.Position;
-import Player.Color;
+import Utils.Color;
 import Player.Player;
-
+/**
+ * Represents a knight piece from a chess board
+ * 
+ * @author Dee Quinn
+ * @see {@link Piece}
+ */
 public class Knight extends Piece{
 
     public Knight(Player player, Position pos) {
@@ -122,7 +127,7 @@ public class Knight extends Piece{
     
     @Override
     public String toString(){
-        if(getColor() == Color.White){
+        if(getColor() == Color.WHITE){
             return "wK";
         }
         
