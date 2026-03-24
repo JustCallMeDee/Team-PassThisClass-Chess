@@ -140,4 +140,12 @@ public class Player {
             return false;
         }
     }
+    
+    /**
+     * Adds a piece to the list of pieces owned by this player.
+     * @param piece The piece to be added to this player
+     */
+    public void addPiece(Piece piece) {
+        pieces.add(piece);
+    }
 }
