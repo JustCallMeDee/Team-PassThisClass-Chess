@@ -3,8 +3,16 @@ package Pieces;
 import java.util.ArrayList;
 import Player.*;
 import Board.Position;
-
+/**
+ * Represents a pawn piece from a chess board
+ * 
+ * @author Dee Quinn
+ * @see {@link Piece}
+ */
 public class Pawn extends Piece{
+    /**
+     * Tracks if the piece has moved or not
+     */
     private boolean hasMoved = false;
 
     public Pawn(Player player, Position pos) {
@@ -12,6 +20,10 @@ public class Pawn extends Piece{
         //TODO Auto-generated constructor stub
     }
 
+    /**
+     * Gets if this piece has moved or not
+     * @return If this piece has moved or not
+     */
     public boolean getHasMoved(){
         return hasMoved;
     }

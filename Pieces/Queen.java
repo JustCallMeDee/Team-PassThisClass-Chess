@@ -5,7 +5,12 @@ import java.util.ArrayList;
 import Board.Position;
 import Player.Color;
 import Player.Player;
-
+/**
+ * Represents a queen piece from a chess board
+ * 
+ * @author Dee Quinn
+ * @see {@link Piece}
+ */
 public class Queen extends Piece{
 
     public Queen(Player player, Position pos) {
