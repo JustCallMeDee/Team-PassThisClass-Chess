@@ -3,11 +3,13 @@ package Pieces;
 import java.util.ArrayList;
 
 import Board.Position;
+import Player.Color;
+import Player.Player;
 
 public class Knight extends Piece{
 
-    public Knight(Position pos) {
-        super(pos);
+    public Knight(Player player, Position pos) {
+        super(player, pos);
         //TODO Auto-generated constructor stub
     }
 
@@ -24,7 +26,10 @@ public class Knight extends Piece{
         Position check;
         try{
             check = new Position(row, this.getPosition().getColumn() + 1);
-            //Check board state
+            if(getPlayer().findPieceAt(check) == null){
+                throw new IllegalArgumentException();
+            }            
+            //Todo: If leaves in check, continue loop
             positions.add(check);
         }
         catch(IllegalArgumentException e){
@@ -33,7 +38,10 @@ public class Knight extends Piece{
 
         try {
             check = new Position(row, this.getPosition().getColumn() - 1);
-            //Check board state
+            if(getPlayer().findPieceAt(check) == null){
+                throw new IllegalArgumentException();
+            }            
+            //Todo: If leaves in check, continue loop
             positions.add(check);
         } catch (IllegalArgumentException e) {
             // TODO: handle exception
@@ -42,7 +50,10 @@ public class Knight extends Piece{
         row = this.getPosition().getRow() - 2;
         try {
             check = new Position(row, this.getPosition().getColumn() + 1);
-            //Check board state
+            if(getPlayer().findPieceAt(check) == null){
+                throw new IllegalArgumentException();
+            }            
+            //Todo: If leaves in check, continue loop
             positions.add(check);
         } catch (IllegalArgumentException e) {
             // TODO: handle exception
@@ -50,7 +61,10 @@ public class Knight extends Piece{
 
         try {
             check = new Position(row, this.getPosition().getColumn() + 1);
-            //Check board state
+            if(getPlayer().findPieceAt(check) == null){
+                throw new IllegalArgumentException();
+            }            
+            //Todo: If leaves in check, continue loop
             positions.add(check);
         } catch (IllegalArgumentException e) {
             // TODO: handle exception
@@ -60,7 +74,10 @@ public class Knight extends Piece{
         char column = (char)(this.getPosition().getColumn() + 2);
         try {
             check = new Position(this.getPosition().getRow() + 1, column);
-            //Check board state
+            if(getPlayer().findPieceAt(check) == null){
+                throw new IllegalArgumentException();
+            }            
+            //Todo: If leaves in check, continue loop
             positions.add(check);
         } catch (Exception e) {
             // TODO: handle exception
@@ -68,7 +85,10 @@ public class Knight extends Piece{
 
         try {
             check = new Position(this.getPosition().getRow() - 1, column);
-            //Check board state
+            if(getPlayer().findPieceAt(check) == null){
+                throw new IllegalArgumentException();
+            }            
+            //Todo: If leaves in check, continue loop
             positions.add(check);
         } catch (Exception e) {
             // TODO: handle exception
@@ -77,7 +97,10 @@ public class Knight extends Piece{
         column = (char)(this.getPosition().getColumn() - 2);
         try {
             check = new Position(this.getPosition().getRow() + 1, column);
-            //Check board state
+            if(getPlayer().findPieceAt(check) == null){
+                throw new IllegalArgumentException();
+            }            
+            //Todo: If leaves in check, continue loop
             positions.add(check);
         } catch (Exception e) {
             // TODO: handle exception
@@ -85,7 +108,10 @@ public class Knight extends Piece{
 
         try {
             check = new Position(this.getPosition().getRow() - 1, column);
-            //Check board state
+            if(getPlayer().findPieceAt(check) == null){
+                throw new IllegalArgumentException();
+            }
+            //Todo: If leaves in check, continue loop
             positions.add(check);
         } catch (Exception e) {
             // TODO: handle exception
@@ -94,4 +120,12 @@ public class Knight extends Piece{
         return positions;
     }
     
+    @Override
+    public String toString(){
+        if(getColor() == Color.White){
+            return "wK";
+        }
+        
+        return "bK";
+    }
 }

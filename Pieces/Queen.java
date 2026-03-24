@@ -3,11 +3,13 @@ package Pieces;
 import java.util.ArrayList;
 
 import Board.Position;
+import Player.Color;
+import Player.Player;
 
 public class Queen extends Piece{
 
-    public Queen(Position pos) {
-        super(pos);
+    public Queen(Player player, Position pos) {
+        super(player, pos);
         //TODO Auto-generated constructor stub
     }
 
@@ -16,12 +18,15 @@ public class Queen extends Piece{
         ArrayList<Position> positions = new ArrayList<Position>();
         Position check;
         boolean capture = false;
-        //Check all forizontal moves to the right. When one position is invalid, stop the loop 
+        //Check all horizontal moves to the right. When one position is invalid, stop the loop 
         for(int i = this.getPosition().getRow() + 1; i <= this.getPosition().getRow() + 8; i++){
             try {
                 check = new Position(i, this.getPosition().getColumn());
-                //Check board state
-                //Check if there is a capture
+                if(getPlayer().findPieceAt(check) == null){
+                    throw new IllegalArgumentException();
+                }            
+                //Todo: If leaves in check, continue loop
+                //Todo: Check if there is a capture, set capture to that
                 positions.add(check);
                 if(capture){
                     break;
@@ -36,8 +41,11 @@ public class Queen extends Piece{
         for(int i = this.getPosition().getRow() - 1; i >= this.getPosition().getRow() - 8; i--){
             try {
                 check = new Position(i, this.getPosition().getColumn());
-                //Check board state
-                //Check if there is a capture
+                if(getPlayer().findPieceAt(check) == null){
+                    throw new IllegalArgumentException();
+                }            
+                //Todo: If leaves in check, continue loop
+                //Todo: Check if there is a capture, set capture to that
                 positions.add(check);
                 if(capture){
                     break;
@@ -51,8 +59,11 @@ public class Queen extends Piece{
         for(int j = this.getPosition().getColumn() + 1; j <= this.getPosition().getColumn() + 8; j++){
             try {
                 check = new Position(this.getPosition().getRow(), j);
-                //Check board state
-                //Check if there is a capture
+                if(getPlayer().findPieceAt(check) == null){
+                    throw new IllegalArgumentException();
+                }            
+                //Todo: If leaves in check, continue loop
+                //Todo: Check if there is a capture, set capture to that
                 positions.add(check);
                 if(capture){
                     break;
@@ -66,8 +77,11 @@ public class Queen extends Piece{
         for(int j = this.getPosition().getColumn() - 1; j >= this.getPosition().getColumn() - 8; j--){
             try {
                 check = new Position(this.getPosition().getRow(), j);
-                //Check board state
-                //Check if there is a capture
+                if(getPlayer().findPieceAt(check) == null){
+                    throw new IllegalArgumentException();
+                }            
+                //Todo: If leaves in check, continue loop
+                //Todo: Check if there is a capture, set capture to that
                 positions.add(check);
                 if(capture){
                     break;
@@ -81,8 +95,11 @@ public class Queen extends Piece{
         for(int i = 1; i <= 8; i++){
             try {
                 check = new Position(this.getPosition().getRow() + i, this.getPosition().getColumn() + i);
-                //Check board state
-                //Check if there is a capture, if so change capture to true
+                if(getPlayer().findPieceAt(check) == null){
+                    throw new IllegalArgumentException();
+                }            
+                //Todo: If leaves in check, continue loop
+                //Todo: Check if there is a capture, set capture to that
                 positions.add(check);
                 if(capture){
                     break;
@@ -97,8 +114,11 @@ public class Queen extends Piece{
         for(int i = 1; i <= 8; i++){
             try {
                 check = new Position(this.getPosition().getRow() + i, this.getPosition().getColumn() - i);
-                //Check board state
-                //Check if there is a capture, if so change capture to true
+                if(getPlayer().findPieceAt(check) == null){
+                    throw new IllegalArgumentException();
+                }            
+                //Todo: If leaves in check, continue loop
+                //Todo: Check if there is a capture, set capture to that
                 positions.add(check);
                 if(capture){
                     break;
@@ -113,8 +133,11 @@ public class Queen extends Piece{
         for(int i = 1; i <= 8; i++){
             try {
                 check = new Position(this.getPosition().getRow() - i, this.getPosition().getColumn() + i);
-                //Check board state
-                //Check if there is a capture, if so change capture to true
+                if(getPlayer().findPieceAt(check) == null){
+                    throw new IllegalArgumentException();
+                }            
+                //Todo: If leaves in check, continue loop
+                //Todo: Check if there is a capture, set capture to that
                 positions.add(check);
                 if(capture){
                     break;
@@ -129,8 +152,11 @@ public class Queen extends Piece{
         for(int i = 1; i <= 8; i++){
             try {
                 check = new Position(this.getPosition().getRow() - i, this.getPosition().getColumn() - i);
-                //Check board state
-                //Check if there is a capture, if so change capture to true
+                if(getPlayer().findPieceAt(check) == null){
+                    throw new IllegalArgumentException();
+                }            
+                //Todo: If leaves in check, continue loop
+                //Todo: Check if there is a capture, set capture to that
                 positions.add(check);
                 if(capture){
                     break;
@@ -141,5 +167,14 @@ public class Queen extends Piece{
         }
 
         return positions;
+    }
+
+    @Override
+    public String toString(){
+        if(getColor() == Color.White){
+            return "wQ";
+        }
+        
+        return "bQ";
     }
 }

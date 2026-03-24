@@ -1,6 +1,8 @@
 package Pieces;
 
 import Board.Position;
+import Player.Player;
+import Player.Color;
 import java.util.ArrayList;
 
 /**
@@ -10,7 +12,8 @@ import java.util.ArrayList;
  * @see {@link Board.Position}
  */
 public abstract class Piece {
-    //Figure out how we are doing Color
+    
+    private Player player;
 
     /**
      * Tracks the position of the piece on a board.
@@ -18,16 +21,17 @@ public abstract class Piece {
      */
     private Position pos;
 
-    public Piece(/*color,*/ Position pos){
+    public Piece(Player player, Position pos){
+        this.player = player;
         this.pos = pos;
     }
 
-    public Piece(/*color,*/ int row, char column){
-        this(/*color,*/ new Position(row, column));
+    public Player getPlayer(){
+        return player;
     }
 
-    public Piece(/*color,*/ int row, int column){
-        this(/*color,*/ new Position(row, column));
+    public Color getColor(){
+        return player.getColor();
     }
 
     /**

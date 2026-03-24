@@ -41,13 +41,29 @@ public class Position {
 
     public static boolean isValid(Position p){
         if(p.getRow() < 1 || p.getRow() > 8){
+            System.out.print("row");
             return false;
         }
-        
-        if(p.getColumn() < 'A' || p.getColumn() > 'H'){
+        //'A' = 65, 'H' = 72
+        if(p.getColumn() < 65 || p.getColumn() > 72){
+            System.out.print("column");
             return false;
         }
 
         return true;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        try {
+            Position p = (Position)(obj);
+            if(this.row == p.getRow() && this.column == p.getColumn()){
+                return true;
+            }
+            return false;
+        } catch (Exception e) {
+            return super.equals(obj);
+        }
+
     }
 }

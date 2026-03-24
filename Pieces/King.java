@@ -3,12 +3,14 @@ package Pieces;
 import java.util.ArrayList;
 
 import Board.Position;
+import Player.Color;
+import Player.Player;
 
 public class King extends Piece{
     private boolean hasMoved = false;
 
-    public King(Position pos) {
-        super(pos);
+    public King(Player player, Position pos) {
+        super(player, pos);
         //TODO Auto-generated constructor stub
     }
 
@@ -41,14 +43,12 @@ public class King extends Piece{
                     //If it is invalid, skip this itteration of the loop  
                     if(check.getRow() == this.getPosition().getRow()
                             && check.getColumn() == this.getPosition().getColumn()){
-                        continue;
+                        throw new IllegalArgumentException();
                     }
-                    /*
-                    Unimplemented:
-                        Check that this will not land on the same space as a same-color piece
-                        or that it will leave the king in check. Likely leave this to the 
-                        Board class.
-                    */
+                    if(getPlayer().findPieceAt(check) == null){
+                        throw new IllegalArgumentException();
+                    }    
+                    //TODO: Check if in check
                     positions.add(check);
                 }
                 catch (IllegalArgumentException e){
@@ -60,4 +60,12 @@ public class King extends Piece{
         return positions;
     }
     
+    @Override
+    public String toString(){
+        if(getColor() == Color.White){
+            return "wK";
+        }
+        
+        return "bK";
+    }
 }
