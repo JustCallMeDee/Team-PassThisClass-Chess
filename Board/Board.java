@@ -101,15 +101,65 @@ public class Board {
     }
 
     public boolean isCheck(Color color) {
-        return false;
-    }
+        public boolean isCheck(Color color) {
+        Player player = getPlayer(color);
+        Piece king = player.getKing();   // You need to add getKing() to Player (see below)
 
+        if (king == null) return false;
+        return king.isInCheck(this);
+    }
+    
     public boolean isCheck(Position moveStart, Position moveEnd) {
-        return false;
+        Piece piece = getPiece(moveStart);
+        if (piece == null) return false;
+
+        Piece captured = getPiece(moveEnd);
+
+        board[moveStart.getRow()][moveStart.getCol()] = null;
+        board[moveEnd.getRow()][moveEnd.getCol()] = piece;
+        Position originalPos = piece.getPosition();
+        piece.setPosition(moveEnd);
+
+        Color opponentColor = (piece.getColor() == Color.WHITE) ? Color.BLACK : Color.WHITE;
+        boolean opponentInCheck = isCheck(opponentColor);
+
+        board[moveStart.getRow()][moveStart.getCol()] = piece;
+        board[moveEnd.getRow()][moveEnd.getCol()] = captured;
+        piece.setPosition(originalPos);
+
+        return opponentInCheck;
     }
 
     public boolean isCheckmate(Color color) {
-        return false;
+         if (!isCheck(color)) return false;
+
+        Player player = getPlayer(color);
+
+        for (Piece piece : new ArrayList<>(player.getPieces())) {
+            Position start = piece.getPosition();
+            for (Position end : piece.getPossibleMoves(this)) {
+                if (isMoveSafe(piece, start, end, color)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+      private boolean isMoveSafe(Piece piece, Position start, Position end, Color color) {
+        Piece captured = board[end.getRow()][end.getCol()];
+
+        board[start.getRow()][start.getCol()] = null;
+        board[end.getRow()][end.getCol()] = piece;
+        Position original = piece.getPosition();
+        piece.setPosition(end);
+
+        boolean stillInCheck = isCheck(color);
+
+        board[start.getRow()][start.getCol()] = piece;
+        board[end.getRow()][end.getCol()] = captured;
+        piece.setPosition(original);
+
+        return stillInCheck;
     }
 
     public void display() {
