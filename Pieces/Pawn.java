@@ -1,7 +1,7 @@
 package Pieces;
 
 import java.util.ArrayList;
-import Player.Player;
+import Player.*;
 import Board.Position;
 
 public class Pawn extends Piece{
@@ -80,5 +80,13 @@ public class Pawn extends Piece{
 
         return positions;
     }
-    
+
+    @Override
+    public String toString(){
+        if(getColor() == Color.White){
+            return "wP";
+        }
+        
+        return "bP";
+    }
 }

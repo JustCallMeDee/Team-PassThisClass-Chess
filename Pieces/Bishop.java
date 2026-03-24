@@ -3,6 +3,7 @@ package Pieces;
 import java.util.ArrayList;
 
 import Board.Position;
+import Player.Color;
 import Player.Player;
 
 public class Bishop extends Piece{
@@ -97,4 +98,12 @@ public class Bishop extends Piece{
         return positions;
     }
     
+    @Override
+    public String toString(){
+        if(getColor() == Color.White){
+            return "wB";
+        }
+        
+        return "bB";
+    }
 }

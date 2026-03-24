@@ -1,6 +1,8 @@
 package Pieces;
 
 import java.util.ArrayList;
+
+import Player.Color;
 import Player.Player;
 import Board.Position;
 
@@ -106,6 +108,13 @@ public class Rook extends Piece{
         return positions;
     }
 
-
+    @Override
+    public String toString(){
+        if(getColor() == Color.White){
+            return "wR";
+        }
+        
+        return "bR";
+    }
     
 }
