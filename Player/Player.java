@@ -12,7 +12,13 @@ import java.util.ArrayList;
  * @see {@link java.util.ArrayList}
  */
 public class Player {
+    /**
+     * The current color of the player
+     */
     Color color;
+    /**
+     * A list of all pieces currently owned by the player
+     */
     ArrayList<Piece> pieces;
     //Current board
 
@@ -62,19 +68,33 @@ public class Player {
 
         return board;
     }
-
+    /**
+     * Gets the color of the player
+     * @return The color of the player
+     */
     public Color getColor(){
         return color;
     }
 
+    /**
+     * Gets the array list of pieces
+     * @return The array list of pieces
+     */
     public ArrayList<Piece> getPieces(){
         return pieces;
     }
 
+    /**
+     * Gets the board the player is on
+     * @return The board the player is on
+     */
     public void getBoard(){
         //Unimplemented
     }
 
+    /**
+     * Sets the board the player is on
+     */
     public void setBoard(){
         //Unimplemented
     }
