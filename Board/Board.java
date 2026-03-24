@@ -1,8 +1,9 @@
 package Board;
 
 import Pieces.*;
-import Pieces.Piece;
 import Player.*;
+import Utils.Color;
+//import java.util.*;
 
 public class Board {
     private Position[][] board;
@@ -15,41 +16,45 @@ public class Board {
         blackPlayer.addPiece(new Pawn(Color.Black, new Position(1, col)));
     }
 
-    whitePlayer.addPiece(new Rook(Color.White, new Position(7, 0)));
-    whitePlayer.addPiece(new Rook(Color.White, new Position(7, 7)));
-    blackPlayer.addPiece(new Rook(Color.Black, new Position(0, 0)));
-    blackPlayer.addPiece(new Rook(Color.Black, new Position(0, 7)));
-
-    whitePlayer.addPiece(new Knight(Color.White, new Position(7, 1)));
-    whitePlayer.addPiece(new Knight(Color.White, new Position(7, 6)));
-    blackPlayer.addPiece(new Knight(Color.Black, new Position(0, 1)));
-    blackPlayer.addPiece(new Knight(Color.Black, new Position(0, 6)));
-
-    whitePlayer.addPiece(new Bishop(Color.White, new Position(7, 2)));
-    whitePlayer.addPiece(new Bishop(Color.White, new Position(7, 5)));
-    blackPlayer.addPiece(new Bishop(Color.Black, new Position(0, 2)));
-    blackPlayer.addPiece(new Bishop(Color.Black, new Position(0, 5)));
-
-    whitePlayer.addPiece(new Queen(Color.White, new Position(7, 3)));
-    blackPlayer.addPiece(new Queen(Color.Black, new Position(0, 3)));
-
-    whitePlayer.addPiece(new King(Color.White, new Position(7, 4)));
-    blackPlayer.addPiece(new King(Color.Black, new Position(0, 4)));
-}
-
-    public Board(Player whitePlayer, Player blackPlayer) {
-        this.whitePlayer = whitePlayer;
-        this.blackPlayer = blackPlayer;
-        this.board = new Position[8][8];
-        for(int i=0; i<8; i++){
-            for(int j=0; j<8; j++){
-                board[i][j] = new Position(i, j);
-            }
+    public void initializeBoard() {
+        for (int col = 0; col < 8; col++) {
+            Pawn whitePawn = new Pawn(whitePlayer, new Position(6, col));
+            Pawn blackPawn = new Pawn(blackPlayer, new Position(1, col));
+            placeAndAdd(whitePawn, whitePlayer);
+            placeAndAdd(blackPawn, blackPlayer);
         }
+
+        placeAndAdd(new Rook(whitePlayer, new Position(7, 0)), whitePlayer);
+        placeAndAdd(new Rook(whitePlayer, new Position(7, 7)), whitePlayer);
+        placeAndAdd(new Rook(blackPlayer, new Position(0, 0)), blackPlayer);
+        placeAndAdd(new Rook(blackPlayer, new Position(0, 7)), blackPlayer);
+
+        placeAndAdd(new Knight(whitePlayer, new Position(7, 1)), whitePlayer);
+        placeAndAdd(new Knight(whitePlayer, new Position(7, 6)), whitePlayer);
+        placeAndAdd(new Knight(whitePlayer, new Position(0, 1)), blackPlayer);
+        placeAndAdd(new Knight(whitePlayer, new Position(0, 6)), blackPlayer);
+
+        placeAndAdd(new Bishop(whitePlayer, new Position(7, 2)), whitePlayer);
+        placeAndAdd(new Bishop(whitePlayer, new Position(7, 5)), whitePlayer);
+        placeAndAdd(new Bishop(blackPlayer, new Position(0, 2)), blackPlayer);
+        placeAndAdd(new Bishop(blackPlayer, new Position(0, 5)), blackPlayer);
+
+        placeAndAdd(new Queen(whitePlayer, new Position(7, 3)), whitePlayer);
+        placeAndAdd(new Queen(blackPlayer, new Position(0, 3)), blackPlayer);
+
+        placeAndAdd(new King(whitePlayer, new Position(7, 4)), whitePlayer);
+        placeAndAdd(new King(blackPlayer, new Position(0, 4)), blackPlayer);
     }
-    public Board(){
-        this(new Player(Color.White), new Player(Color.Black));
-        //initializeBoard();
+
+    private void placePiece(Piece piece) {
+        Position pos = piece.getPosition();
+        board[pos.getRow()][pos.getColumn()] = piece;
+    }
+
+    private void placeAndAdd(Piece piece, Player player) {
+        placePiece(piece);
+        piece.move(piece.getPosition());
+        player.addPiece(piece);
     }
 
     public Player getPlayer(Color color){
