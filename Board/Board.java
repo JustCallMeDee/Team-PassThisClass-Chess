@@ -9,12 +9,6 @@ public class Board {
     private Position[][] board;
     private Player whitePlayer;
     private Player blackPlayer;
-    public void initializeBoard() {
-
-    for (int col = 0; col < 8; col++) {
-        whitePlayer.addPiece(new Pawn(Color.White, new Position(6, col)));
-        blackPlayer.addPiece(new Pawn(Color.Black, new Position(1, col)));
-    }
 
     public void initializeBoard() {
         for (int col = 0; col < 8; col++) {
@@ -48,7 +42,7 @@ public class Board {
 
     private void placePiece(Piece piece) {
         Position pos = piece.getPosition();
-        board[pos.getRow()][pos.getColumn()] = piece;
+        board[pos.getRow()][pos.getColumn()] = pos;
     }
 
     private void placeAndAdd(Piece piece, Player player) {
@@ -58,7 +52,7 @@ public class Board {
     }
 
     public Player getPlayer(Color color){
-        if(color == Color.White){
+        if(color == Color.WHITE){
             return getWhitePlayer();
         }
         else{
@@ -91,14 +85,14 @@ public class Board {
 
         Piece target = getPiece(end);
 
-    if(piece.getColor() == Color.White){
+    if(piece.getColor() == Color.WHITE){
         whitePlayer.makeMove(start, end);
-        if(target != null && target.getColor() == Color.Black){
+        if(target != null && target.getColor() == Color.BLACK){
             blackPlayer.capturePiece(end);
         }
     } else {
         blackPlayer.makeMove(start, end);
-        if(target != null && target.getColor() == Color.White){
+        if(target != null && target.getColor() == Color.WHITE){
             whitePlayer.capturePiece(end);
         }
     }
