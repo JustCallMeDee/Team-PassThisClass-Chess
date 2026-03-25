@@ -52,10 +52,20 @@ public abstract class Piece {
      * @see {@link Board.Position}
      */
     public boolean move(Position newPos){
+        //System.out.print("|" + this.toString() + " at " + getPosition().getColumn() + getPosition().getRow() + " ");
         if(possibleMoves().contains(newPos)){
             pos = newPos;
+            //System.out.println("moved to " + newPos.getColumn() + newPos.getRow());
             return true;
         }
+        /*
+        System.out.print("|||");
+        for(Position p : possibleMoves()){
+            System.out.print(Character.toString(p.getColumn()) + p.getRow() + " ");
+        }
+        System.out.print("|||");
+        System.out.println("failed to move to " + newPos.getColumn() + newPos.getRow());
+        */
         return false;
     }
     

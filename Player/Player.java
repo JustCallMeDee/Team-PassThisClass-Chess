@@ -137,9 +137,11 @@ public class Player {
     public boolean makeMove(Position startPos, Position endPos){
         Piece p = findPieceAt(startPos);
         if(p != null){
+            //System.out.println("Found piece");
             return p.move(endPos);
         }
         else{
+            //System.out.println("Didn't find piece");
             return false;
         }
     }

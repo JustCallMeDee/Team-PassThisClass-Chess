@@ -29,7 +29,7 @@ public class Bishop extends Piece{
         for(int i = 1; i <= 8; i++){
             try {
                 check = new Position(this.getPosition().getRow() + i, this.getPosition().getColumn() + i);
-                if(getPlayer().findPieceAt(check) == null){
+                if(getPlayer().findPieceAt(check) != null){
                     throw new IllegalArgumentException();
                 }            
                 //Todo: If leaves in check, continue loop
@@ -48,7 +48,7 @@ public class Bishop extends Piece{
         for(int i = 1; i <= 8; i++){
             try {
                 check = new Position(this.getPosition().getRow() + i, this.getPosition().getColumn() - i);
-                if(getPlayer().findPieceAt(check) == null){
+                if(getPlayer().findPieceAt(check) != null){
                     throw new IllegalArgumentException();
                 }            
                 //Todo: If leaves in check, continue loop
@@ -67,7 +67,7 @@ public class Bishop extends Piece{
         for(int i = 1; i <= 8; i++){
             try {
                 check = new Position(this.getPosition().getRow() - i, this.getPosition().getColumn() + i);
-                if(getPlayer().findPieceAt(check) == null){
+                if(getPlayer().findPieceAt(check) != null){
                     throw new IllegalArgumentException();
                 }            
                 //Todo: If leaves in check, continue loop
@@ -86,7 +86,7 @@ public class Bishop extends Piece{
         for(int i = 1; i <= 8; i++){
             try {
                 check = new Position(this.getPosition().getRow() - i, this.getPosition().getColumn() - i);
-                if(getPlayer().findPieceAt(check) == null){
+                if(getPlayer().findPieceAt(check) != null){
                     throw new IllegalArgumentException();
                 }            
                 //Todo: If leaves in check, continue loop

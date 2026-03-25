@@ -43,11 +43,11 @@ public class Pawn extends Piece{
         ArrayList<Position> positions = new ArrayList<Position>();
 
         //Check moving spaces first
-        //+1/2 if white, -1/2 if black
         Position check;
+        int moveModifier = getColor() == Color.WHITE ? -1 : 1;
         try{
-            check = new Position(this.getPosition().getRow() + 1, this.getPosition().getColumn());
-            if(getPlayer().findPieceAt(check) == null){
+            check = new Position(this.getPosition().getRow() + moveModifier, this.getPosition().getColumn());
+            if(getPlayer().findPieceAt(check) != null){
                 throw new IllegalArgumentException();
             }
             //TODO: Check if this leaves them in check
@@ -59,8 +59,8 @@ public class Pawn extends Piece{
 
         if(!hasMoved){
             try{
-                check = new Position(this.getPosition().getRow() + 2, this.getPosition().getColumn());
-                if(getPlayer().findPieceAt(check) == null){
+                check = new Position(this.getPosition().getRow() + (2 * moveModifier), this.getPosition().getColumn());
+                if(getPlayer().findPieceAt(check) != null){
                     throw new IllegalArgumentException();
                 }                
                 //TODO: Check if this leaves them in check
@@ -75,21 +75,21 @@ public class Pawn extends Piece{
         //If so, add those
         //Unimplemented: Needs board to be done
         //DEBUG STATEMENTS
-        boolean pieceLeft = true, pieceRight = false; 
-
+        //boolean pieceLeft = true, pieceRight = false; 
+/*
         //Since a piece already occupies the spaces we are checking, only need to check if king is in check
         if(pieceLeft){
-            check = new Position(this.getPosition().getRow() + 1, this.getPosition().getColumn() - 1);
+            check = new Position(this.getPosition().getRow() + moveModifier, this.getPosition().getColumn() - 1);
             //TODO: Check if check
             positions.add(check);
         }
 
         if(pieceRight){
-            check = new Position(this.getPosition().getRow() + 1, this.getPosition().getColumn() + 1);
+            check = new Position(this.getPosition().getRow() + moveModifier, this.getPosition().getColumn() + 1);
             //TODO: Check if check
             positions.add(check);
         }
-
+*/
 
         return positions;
     }

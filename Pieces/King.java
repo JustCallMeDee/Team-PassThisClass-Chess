@@ -50,7 +50,7 @@ public class King extends Piece{
                             && check.getColumn() == this.getPosition().getColumn()){
                         throw new IllegalArgumentException();
                     }
-                    if(getPlayer().findPieceAt(check) == null){
+                    if(getPlayer().findPieceAt(check) != null){
                         throw new IllegalArgumentException();
                     }    
                     //TODO: Check if in check

@@ -2,7 +2,7 @@ package Utils;
 
 public class Utils {
 
-    public static Position parsePosition(String square){
+    public static Board.Position parsePosition(String square){
         if (square == null || square.length() != 2) {
             return null;
         }
@@ -16,10 +16,10 @@ public class Utils {
             return null;
         }
 
-        int col = file - 'A';
-        int row = 8 - (rank - '0');
+        int col = file - '@';
+        int row = 9 - Integer.parseInt(Character.toString(rank));
 
-        return new Position(row, col);
+        return new Board.Position(row, col);
     }
 
     public static boolean isValidMoveFormat(String input){

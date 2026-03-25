@@ -31,7 +31,7 @@ public class Knight extends Piece{
         Position check;
         try{
             check = new Position(row, this.getPosition().getColumn() + 1);
-            if(getPlayer().findPieceAt(check) == null){
+            if(getPlayer().findPieceAt(check) != null){
                 throw new IllegalArgumentException();
             }            
             //Todo: If leaves in check, continue loop
@@ -43,7 +43,7 @@ public class Knight extends Piece{
 
         try {
             check = new Position(row, this.getPosition().getColumn() - 1);
-            if(getPlayer().findPieceAt(check) == null){
+            if(getPlayer().findPieceAt(check) != null){
                 throw new IllegalArgumentException();
             }            
             //Todo: If leaves in check, continue loop
@@ -55,7 +55,7 @@ public class Knight extends Piece{
         row = this.getPosition().getRow() - 2;
         try {
             check = new Position(row, this.getPosition().getColumn() + 1);
-            if(getPlayer().findPieceAt(check) == null){
+            if(getPlayer().findPieceAt(check) != null){
                 throw new IllegalArgumentException();
             }            
             //Todo: If leaves in check, continue loop
@@ -65,8 +65,8 @@ public class Knight extends Piece{
         }
 
         try {
-            check = new Position(row, this.getPosition().getColumn() + 1);
-            if(getPlayer().findPieceAt(check) == null){
+            check = new Position(row, this.getPosition().getColumn() - 1);
+            if(getPlayer().findPieceAt(check) != null){
                 throw new IllegalArgumentException();
             }            
             //Todo: If leaves in check, continue loop
@@ -79,7 +79,7 @@ public class Knight extends Piece{
         char column = (char)(this.getPosition().getColumn() + 2);
         try {
             check = new Position(this.getPosition().getRow() + 1, column);
-            if(getPlayer().findPieceAt(check) == null){
+            if(getPlayer().findPieceAt(check) != null){
                 throw new IllegalArgumentException();
             }            
             //Todo: If leaves in check, continue loop
@@ -90,7 +90,7 @@ public class Knight extends Piece{
 
         try {
             check = new Position(this.getPosition().getRow() - 1, column);
-            if(getPlayer().findPieceAt(check) == null){
+            if(getPlayer().findPieceAt(check) != null){
                 throw new IllegalArgumentException();
             }            
             //Todo: If leaves in check, continue loop
@@ -102,7 +102,7 @@ public class Knight extends Piece{
         column = (char)(this.getPosition().getColumn() - 2);
         try {
             check = new Position(this.getPosition().getRow() + 1, column);
-            if(getPlayer().findPieceAt(check) == null){
+            if(getPlayer().findPieceAt(check) != null){
                 throw new IllegalArgumentException();
             }            
             //Todo: If leaves in check, continue loop
@@ -113,7 +113,7 @@ public class Knight extends Piece{
 
         try {
             check = new Position(this.getPosition().getRow() - 1, column);
-            if(getPlayer().findPieceAt(check) == null){
+            if(getPlayer().findPieceAt(check) != null){
                 throw new IllegalArgumentException();
             }
             //Todo: If leaves in check, continue loop
@@ -128,9 +128,9 @@ public class Knight extends Piece{
     @Override
     public String toString(){
         if(getColor() == Color.WHITE){
-            return "wK";
+            return "wN";
         }
         
-        return "bK";
+        return "bN";
     }
 }

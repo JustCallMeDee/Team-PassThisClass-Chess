@@ -40,7 +40,7 @@ public class Rook extends Piece{
         for(int i = this.getPosition().getRow() + 1; i <= this.getPosition().getRow() + 8; i++){
             try {
                 check = new Position(i, this.getPosition().getColumn());
-                if(getPlayer().findPieceAt(check) == null){
+                if(getPlayer().findPieceAt(check) != null){
                     throw new IllegalArgumentException();
                 }            
                 //Todo: If leaves in check, continue loop
@@ -59,7 +59,7 @@ public class Rook extends Piece{
         for(int i = this.getPosition().getRow() - 1; i >= this.getPosition().getRow() - 8; i--){
             try {
                 check = new Position(i, this.getPosition().getColumn());
-                if(getPlayer().findPieceAt(check) == null){
+                if(getPlayer().findPieceAt(check) != null){
                     throw new IllegalArgumentException();
                 }            
                 //Todo: If leaves in check, continue loop
@@ -77,7 +77,7 @@ public class Rook extends Piece{
         for(int j = this.getPosition().getColumn() + 1; j <= this.getPosition().getColumn() + 8; j++){
             try {
                 check = new Position(this.getPosition().getRow(), j);
-                if(getPlayer().findPieceAt(check) == null){
+                if(getPlayer().findPieceAt(check) != null){
                     throw new IllegalArgumentException();
                 }            
                 //Todo: If leaves in check, continue loop
@@ -95,7 +95,7 @@ public class Rook extends Piece{
         for(int j = this.getPosition().getColumn() - 1; j >= this.getPosition().getColumn() - 8; j--){
             try {
                 check = new Position(this.getPosition().getRow(), j);
-                if(getPlayer().findPieceAt(check) == null){
+                if(getPlayer().findPieceAt(check) != null){
                     throw new IllegalArgumentException();
                 }            
                 //Todo: If leaves in check, continue loop
