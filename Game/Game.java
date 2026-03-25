@@ -51,14 +51,7 @@ public class Game {
                 System.out.println("Invalid board position.");
                 continue;
             }
-            Piece piece = board.getPiece(from);
-
-            if (piece == null || piece.getColor() != currentTurn){
-                System.out.println("Invalid piece selection.");
-                continue;
-            }
-
-            boolean moved = board.movePiece(from, to);
+            boolean moved = board.movePiece(Utils.utilToBoardPosition(from), Utils.utilToBoardPosition(to));
 
             if (moved) {
                 currentTurn = (currentTurn == Color.WHITE)

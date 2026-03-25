@@ -6,7 +6,7 @@ import Pieces.*;
 import Player.Player;
 
 public class Board {
-    private Position[][] board;
+    private Position[][] board = new Position[8][8];
     private Player whitePlayer;
     private Player blackPlayer;
     public void initializeBoard() {
@@ -246,7 +246,9 @@ public class Board {
             sb.append(displayRow + " ");
 
             for (int col = 0; col < 8; col++) {
+                //System.out.print(row + " " + col);
                 Position pos = board[row][col];
+                //System.out.print("AH");
                 Piece piece = getPiece(pos);
 
                 if (piece != null) {
