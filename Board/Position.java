@@ -41,12 +41,12 @@ public class Position {
 
     public static boolean isValid(Position p){
         if(p.getRow() < 1 || p.getRow() > 8){
-            System.out.print("row");
+            //System.out.print("row");
             return false;
         }
         //'A' = 65, 'H' = 72
         if(p.getColumn() < 65 || p.getColumn() > 72){
-            System.out.print("column");
+            //System.out.print("column");
             return false;
         }
 
