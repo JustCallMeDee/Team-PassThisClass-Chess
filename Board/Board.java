@@ -37,11 +37,11 @@ public class Board {
         blackPlayer.addPiece(new Bishop(blackPlayer, new Position(1, 3)));
         blackPlayer.addPiece(new Bishop(blackPlayer, new Position(1, 6)));
 
-        whitePlayer.addPiece(new Queen(whitePlayer, new Position(1, 4)));
-        blackPlayer.addPiece(new Queen(blackPlayer, new Position(8, 4)));
+        whitePlayer.addPiece(new Queen(whitePlayer, new Position(8, 4)));
+        blackPlayer.addPiece(new Queen(blackPlayer, new Position(1, 4)));
 
-        whitePlayer.addPiece(new King(whitePlayer, new Position(1, 5)));
-        blackPlayer.addPiece(new King(blackPlayer, new Position(8, 5)));
+        whitePlayer.addPiece(new King(whitePlayer, new Position(8, 5)));
+        blackPlayer.addPiece(new King(blackPlayer, new Position(1, 5)));
 
         for(int i=1; i<=8; i++){
             for(int j=1; j<=8; j++){
