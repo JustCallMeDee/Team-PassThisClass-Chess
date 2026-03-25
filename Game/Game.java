@@ -3,10 +3,10 @@ package Game;
 import java.util.Scanner;
 
 import Board.Board;
+import Board.Position;
 import Utils.Color;
-import Utils.Position;
 import Utils.Utils;
-import Player.Player;
+import Pieces.Piece;
 
 public class Game {
     private Board board;
@@ -26,7 +26,7 @@ public class Game {
         System.out.println("Type EXIT (all caps) to quit/terminate.");
 
         while (running){
-            System.out.println(board.toString());
+            System.out.println(board);
             System.out.println(currentTurn + "'s turn.");
             System.out.print("Enter your move: ");
 
@@ -53,8 +53,12 @@ public class Game {
             }
             boolean moved = board.movePiece(Utils.utilToBoardPosition(from), Utils.utilToBoardPosition(to));
 
-            if (moved){
-                currentTurn = (currentTurn == Color.WHITE) ? Color.BLACK : Color.WHITE;
+            if (moved) {
+                currentTurn = (currentTurn == Color.WHITE)
+                        ? Color.BLACK
+                        : Color.WHITE;
+            } else {
+                System.out.println("Invalid move.");
             }
         }
         scanner.close();
