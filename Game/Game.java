@@ -44,14 +44,14 @@ public class Game {
             }
 
             String[] parts = input.toUpperCase().split("\\s+");
-            Position from = Utils.parsePosition(parts[0]);
-            Position to = Utils.parsePosition(parts[1]);
+            Position from = Utils.utilToBoardPosition(Utils.parsePosition(parts[0]));
+            Position to = Utils.utilToBoardPosition(Utils.parsePosition(parts[1]));
 
             if (from == null || to == null){
                 System.out.println("Invalid board position.");
                 continue;
             }
-            boolean moved = board.movePiece(Utils.utilToBoardPosition(from), Utils.utilToBoardPosition(to));
+            boolean moved = board.movePiece(from, to);
 
             if (moved) {
                 currentTurn = (currentTurn == Color.WHITE)
