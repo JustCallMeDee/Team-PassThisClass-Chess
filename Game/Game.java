@@ -44,13 +44,15 @@ public class Game {
             }
 
             String[] parts = input.toUpperCase().split("\\s+");
-            Position from = Utils.utilToBoardPosition(Utils.parsePosition(parts[0]));
-            Position to = Utils.utilToBoardPosition(Utils.parsePosition(parts[1]));
+            Position from = Utils.parsePosition(parts[0]);
+            Position to = Utils.parsePosition(parts[1]);
 
             if (from == null || to == null){
                 System.out.println("Invalid board position.");
                 continue;
             }
+
+            //System.out.println("|" + from.getColumn() + from.getRow() + "  " + to.getColumn() + to.getRow());
             boolean moved = board.movePiece(from, to);
 
             if (moved) {
