@@ -6,42 +6,55 @@ import Pieces.*;
 import Player.Player;
 
 public class Board {
-    private Position[][] board;
+    private Position[][] board = new Position[8][8];
     private Player whitePlayer;
     private Player blackPlayer;
+
+    public Board(){
+        whitePlayer = new Player(Color.WHITE);
+        blackPlayer = new Player(Color.BLACK);
+        initializeBoard();
+    }
+
     public void initializeBoard() {
 
-    for (int col = 0; col < 8; col++) {
-        whitePlayer.addPiece(new Pawn(whitePlayer, new Position(6, col)));
-        blackPlayer.addPiece(new Pawn(blackPlayer, new Position(1, col)));
+    for (int col = 1; col <= 8; col++) {
+        whitePlayer.addPiece(new Pawn(whitePlayer, new Position(7, col)));
+        blackPlayer.addPiece(new Pawn(blackPlayer, new Position(2, col)));
     }
-        whitePlayer.addPiece(new Rook(whitePlayer, new Position(7, 0)));
-        whitePlayer.addPiece(new Rook(whitePlayer, new Position(7, 7)));
-        blackPlayer.addPiece(new Rook(blackPlayer, new Position(0, 0)));
-        blackPlayer.addPiece(new Rook(blackPlayer, new Position(0, 7)));
+        whitePlayer.addPiece(new Rook(whitePlayer, new Position(8, 1)));
+        whitePlayer.addPiece(new Rook(whitePlayer, new Position(8, 8)));
+        blackPlayer.addPiece(new Rook(blackPlayer, new Position(1, 1)));
+        blackPlayer.addPiece(new Rook(blackPlayer, new Position(1, 8)));
 
-        whitePlayer.addPiece(new Knight(whitePlayer, new Position(7, 1)));
-        whitePlayer.addPiece(new Knight(whitePlayer, new Position(7, 6)));
-        blackPlayer.addPiece(new Knight(blackPlayer, new Position(0, 1)));
-        blackPlayer.addPiece(new Knight(blackPlayer, new Position(0, 6)));
+        whitePlayer.addPiece(new Knight(whitePlayer, new Position(8, 2)));
+        whitePlayer.addPiece(new Knight(whitePlayer, new Position(8, 7)));
+        blackPlayer.addPiece(new Knight(blackPlayer, new Position(1, 2)));
+        blackPlayer.addPiece(new Knight(blackPlayer, new Position(1, 7)));
 
-        whitePlayer.addPiece(new Bishop(whitePlayer, new Position(7, 2)));
-        whitePlayer.addPiece(new Bishop(whitePlayer, new Position(7, 5)));
-        blackPlayer.addPiece(new Bishop(blackPlayer, new Position(0, 2)));
-        blackPlayer.addPiece(new Bishop(blackPlayer, new Position(0, 5)));
+        whitePlayer.addPiece(new Bishop(whitePlayer, new Position(8, 3)));
+        whitePlayer.addPiece(new Bishop(whitePlayer, new Position(8, 6)));
+        blackPlayer.addPiece(new Bishop(blackPlayer, new Position(1, 3)));
+        blackPlayer.addPiece(new Bishop(blackPlayer, new Position(1, 6)));
 
-        whitePlayer.addPiece(new Queen(whitePlayer, new Position(7, 3)));
-        blackPlayer.addPiece(new Queen(blackPlayer, new Position(0, 3)));
+        whitePlayer.addPiece(new Queen(whitePlayer, new Position(1, 4)));
+        blackPlayer.addPiece(new Queen(blackPlayer, new Position(8, 4)));
 
-        whitePlayer.addPiece(new King(whitePlayer, new Position(7, 4)));
-        blackPlayer.addPiece(new King(blackPlayer, new Position(0, 4)));
+        whitePlayer.addPiece(new King(whitePlayer, new Position(1, 5)));
+        blackPlayer.addPiece(new King(blackPlayer, new Position(8, 5)));
+
+        for(int i=1; i<=8; i++){
+            for(int j=1; j<=8; j++){
+                board[i-1][j-1] = new Position(i, j);
+            }
+        }
     }   
     /*
     private void placePiece(Piece piece) {
         Position pos = piece.getPosition();
         board[pos.getRow()][pos.getColumn()] = pos;
     }
-        
+
     private void placeAndAdd(Piece piece, Player player) {
         placePiece(piece);
         piece.move(piece.getPosition());
@@ -246,7 +259,9 @@ public class Board {
             sb.append(displayRow + " ");
 
             for (int col = 0; col < 8; col++) {
+                //System.out.print(row + " " + col);
                 Position pos = board[row][col];
+                //System.out.print("AH");
                 Piece piece = getPiece(pos);
 
                 if (piece != null) {
