@@ -30,7 +30,8 @@ public class Player {
 
     public Player(Color color){
         this.color = color;
-        pieces = createStandardPieceSetup(color);
+        //pieces = createStandardPieceSetup(color);
+        pieces = new ArrayList<Piece>();
     }
 
     /**
@@ -38,6 +39,7 @@ public class Player {
      * @param color The color of the pieces
      * @return An array list of pieces in standard positions
      */
+    /*
     private ArrayList<Piece> createStandardPieceSetup(Color color) {
         ArrayList<Piece> board = new ArrayList<Piece>();
         if(color == Color.WHITE){
@@ -69,6 +71,7 @@ public class Player {
 
         return board;
     }
+*/
     /**
      * Gets the color of the player
      * @return The color of the player
@@ -139,5 +142,13 @@ public class Player {
         else{
             return false;
         }
+    }
+    
+    /**
+     * Adds a piece to the list of pieces owned by this player.
+     * @param piece The piece to be added to this player
+     */
+    public void addPiece(Piece piece) {
+        pieces.add(piece);
     }
 }

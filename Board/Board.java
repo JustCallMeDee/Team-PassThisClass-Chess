@@ -1,62 +1,55 @@
 package Board;
 
 import java.util.List;
+import Utils.Color;
 import Pieces.*;
-import Pieces.Piece;
-import Player.*;
+import Player.Player;
 
 public class Board {
     private Position[][] board;
     private Player whitePlayer;
     private Player blackPlayer;
-
     public void initializeBoard() {
-        for (int col = 0; col < 8; col++) {
-            whitePlayer.addPiece(new Pawn(Color.White, new Position(6, col)));
-            blackPlayer.addPiece(new Pawn(Color.Black, new Position(1, col)));
-        }
 
-        whitePlayer.addPiece(new Rook(Color.White, new Position(7, 0)));
-        whitePlayer.addPiece(new Rook(Color.White, new Position(7, 7)));
-        blackPlayer.addPiece(new Rook(Color.Black, new Position(0, 0)));
-        blackPlayer.addPiece(new Rook(Color.Black, new Position(0, 7)));
-
-        whitePlayer.addPiece(new Knight(Color.White, new Position(7, 1)));
-        whitePlayer.addPiece(new Knight(Color.White, new Position(7, 6)));
-        blackPlayer.addPiece(new Knight(Color.Black, new Position(0, 1)));
-        blackPlayer.addPiece(new Knight(Color.Black, new Position(0, 6)));
-
-        whitePlayer.addPiece(new Bishop(Color.White, new Position(7, 2)));
-        whitePlayer.addPiece(new Bishop(Color.White, new Position(7, 5)));
-        blackPlayer.addPiece(new Bishop(Color.Black, new Position(0, 2)));
-        blackPlayer.addPiece(new Bishop(Color.Black, new Position(0, 5)));
-
-        whitePlayer.addPiece(new Queen(Color.White, new Position(7, 3)));
-        blackPlayer.addPiece(new Queen(Color.Black, new Position(0, 3)));
-
-        whitePlayer.addPiece(new King(Color.White, new Position(7, 4)));
-        blackPlayer.addPiece(new King(Color.Black, new Position(0, 4)));
+    for (int col = 0; col < 8; col++) {
+        whitePlayer.addPiece(new Pawn(whitePlayer, new Position(6, col)));
+        blackPlayer.addPiece(new Pawn(blackPlayer, new Position(1, col)));
     }
+        whitePlayer.addPiece(new Rook(whitePlayer, new Position(7, 0)));
+        whitePlayer.addPiece(new Rook(whitePlayer, new Position(7, 7)));
+        blackPlayer.addPiece(new Rook(blackPlayer, new Position(0, 0)));
+        blackPlayer.addPiece(new Rook(blackPlayer, new Position(0, 7)));
 
-    public Board(Player whitePlayer, Player blackPlayer) {
-        this.whitePlayer = whitePlayer;
-        this.blackPlayer = blackPlayer;
-        this.board = new Position[8][8];
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                board[i][j] = new Position(i, j);
-            }
-        }
+        whitePlayer.addPiece(new Knight(whitePlayer, new Position(7, 1)));
+        whitePlayer.addPiece(new Knight(whitePlayer, new Position(7, 6)));
+        blackPlayer.addPiece(new Knight(blackPlayer, new Position(0, 1)));
+        blackPlayer.addPiece(new Knight(blackPlayer, new Position(0, 6)));
 
-        initializeBoard();
+        whitePlayer.addPiece(new Bishop(whitePlayer, new Position(7, 2)));
+        whitePlayer.addPiece(new Bishop(whitePlayer, new Position(7, 5)));
+        blackPlayer.addPiece(new Bishop(blackPlayer, new Position(0, 2)));
+        blackPlayer.addPiece(new Bishop(blackPlayer, new Position(0, 5)));
+
+        whitePlayer.addPiece(new Queen(whitePlayer, new Position(7, 3)));
+        blackPlayer.addPiece(new Queen(blackPlayer, new Position(0, 3)));
+
+        whitePlayer.addPiece(new King(whitePlayer, new Position(7, 4)));
+        blackPlayer.addPiece(new King(blackPlayer, new Position(0, 4)));
+    }   
+    /*
+    private void placePiece(Piece piece) {
+        Position pos = piece.getPosition();
+        board[pos.getRow()][pos.getColumn()] = pos;
     }
-
-    public Board() {
-        this(new Player(Color.White), new Player(Color.Black));
+        
+    private void placeAndAdd(Piece piece, Player player) {
+        placePiece(piece);
+        piece.move(piece.getPosition());
+        player.addPiece(piece);
     }
-
-    public Player getPlayer(Color color) {
-        if (color == Color.White) {
+    */
+    public Player getPlayer(Color color){
+        if(color == Color.WHITE){
             return getWhitePlayer();
         } else {
             return getBlackPlayer();
@@ -88,17 +81,17 @@ public class Board {
 
         Piece target = getPiece(end);
 
-        if (piece.getColor() == Color.White) {
-            whitePlayer.makeMove(start, end);
-            if (target != null && target.getColor() == Color.Black) {
-                blackPlayer.capturePiece(end);
-            }
-        } else {
-            blackPlayer.makeMove(start, end);
-            if (target != null && target.getColor() == Color.White) {
-                whitePlayer.capturePiece(end);
-            }
+    if(piece.getColor() == Color.WHITE){
+        whitePlayer.makeMove(start, end);
+        if(target != null && target.getColor() == Color.BLACK){
+            blackPlayer.capturePiece(end);
         }
+    } else {
+        blackPlayer.makeMove(start, end);
+        if(target != null && target.getColor() == Color.WHITE){
+            whitePlayer.capturePiece(end);
+        }
+    }
 
         return true;
     }
@@ -131,7 +124,7 @@ public class Board {
     }
 
     public boolean isCheck() {
-        return isCheck(Color.White) || isCheck(Color.Black);
+        return isCheck(Color.WHITE) || isCheck(Color.BLACK);
     }
 
     public boolean isCheck(Color color) {
@@ -142,7 +135,7 @@ public class Board {
         }
 
         Position kingPosition = king.getPosition();
-        Player opponent = (color == Color.White) ? blackPlayer : whitePlayer;
+        Player opponent = (color == Color.WHITE) ? blackPlayer : whitePlayer;
 
         for (Piece piece : opponent.getPieces()) {
             if (canAttackSquare(piece, kingPosition)) {
@@ -163,7 +156,7 @@ public class Board {
         Position originalPosition = movingPiece.getPosition();
 
         if (capturedPiece != null) {
-            if (capturedPiece.getColor() == Color.White) {
+            if (capturedPiece.getColor() == Color.WHITE) {
                 whitePlayer.capturePiece(moveEnd);
             } else {
                 blackPlayer.capturePiece(moveEnd);
@@ -175,7 +168,7 @@ public class Board {
         movingPiece.move(originalPosition);
 
         if (capturedPiece != null) {
-            if (capturedPiece.getColor() == Color.White) {
+            if (capturedPiece.getColor() == Color.WHITE) {
                 whitePlayer.addPiece(capturedPiece);
             } else {
                 blackPlayer.addPiece(capturedPiece);
@@ -186,7 +179,7 @@ public class Board {
     }
 
     public boolean isCheckmate() {
-        return isCheckmate(Color.White) || isCheckmate(Color.Black);
+        return isCheckmate(Color.WHITE) || isCheckmate(Color.BLACK);
     }
 
     public boolean isCheckmate(Color color) {
@@ -203,7 +196,7 @@ public class Board {
                 continue;
             }
 
-            Position start = piece.getPosition();
+            //Position start = piece.getPosition();
 
             for (Position end : moves) {
                 Piece capturedPiece = getPiece(end);
@@ -214,7 +207,7 @@ public class Board {
                 }
 
                 if (capturedPiece != null) {
-                    if (capturedPiece.getColor() == Color.White) {
+                    if (capturedPiece.getColor() == Color.WHITE) {
                         whitePlayer.capturePiece(end);
                     } else {
                         blackPlayer.capturePiece(end);
@@ -226,7 +219,7 @@ public class Board {
                 piece.move(originalPosition);
 
                 if (capturedPiece != null) {
-                    if (capturedPiece.getColor() == Color.White) {
+                    if (capturedPiece.getColor() == Color.WHITE) {
                         whitePlayer.addPiece(capturedPiece);
                     } else {
                         blackPlayer.addPiece(capturedPiece);

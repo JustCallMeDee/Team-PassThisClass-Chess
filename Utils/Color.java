@@ -1,6 +1,6 @@
 package Utils;
 
-public enum Color{
+public enum Color {
     WHITE,
     BLACK
 }
