@@ -44,10 +44,10 @@ public class Pawn extends Piece{
 
         //Check moving spaces first
         Position check;
-        int moveModifier = getColor() == Color.WHITE ? 1 : -1;
+        int moveModifier = getColor() == Color.WHITE ? -1 : 1;
         try{
             check = new Position(this.getPosition().getRow() + moveModifier, this.getPosition().getColumn());
-            if(getPlayer().findPieceAt(check) == null){
+            if(getPlayer().findPieceAt(check) != null){
                 throw new IllegalArgumentException();
             }
             //TODO: Check if this leaves them in check
@@ -60,7 +60,7 @@ public class Pawn extends Piece{
         if(!hasMoved){
             try{
                 check = new Position(this.getPosition().getRow() + (2 * moveModifier), this.getPosition().getColumn());
-                if(getPlayer().findPieceAt(check) == null){
+                if(getPlayer().findPieceAt(check) != null){
                     throw new IllegalArgumentException();
                 }                
                 //TODO: Check if this leaves them in check
