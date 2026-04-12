@@ -46,7 +46,7 @@ public class Queen extends Piece{
         capture = false;
         for(int i = 1; i <= 8; i++){
             try {
-                check = new Position(this.getPosition().getRow() + i, (char)(this.getPosition().getColumn()));
+                check = new Position(this.getPosition().getRow() - i, (char)(this.getPosition().getColumn()));
                 if(getPlayer().findPieceAt(check) != null){
                     throw new IllegalArgumentException();
                 }            
