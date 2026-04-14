@@ -1,9 +1,9 @@
-package gui;
+package GUI;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import board.Board;
+import Board.Board;
 
 public class ChessGUI extends JFrame{
 

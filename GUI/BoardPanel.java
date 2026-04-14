@@ -1,9 +1,9 @@
-package gui;
+package GUI;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
-import board.Board;
+import Board.Board;
 import Board.Position;
 import Pieces.Piece;
 
@@ -33,12 +33,12 @@ public class BoardPanel extends JPanel {
     }
 
     private void initBoard(){
-        for (int row = 0; row < 8; row++){
-            for (int col = 0; col < 8; col++){
+        for (int row = 1; row < 9; row++){
+            for (int col = 1; col < 9; col++){
                 boolean isLight = (row + col) % 2 == 0;
 
                 SquarePanel square = new SquarePanel(row, col, isLight ? lightColor : darkColor);
-                squares[row][col] = square;
+                squares[row-1][col-1] = square;
 
                 square.addActionListener(e -> handleClick(square));
                 add(square);
@@ -73,10 +73,10 @@ public class BoardPanel extends JPanel {
     }
 
     public void refreshBoard(){
-        for (int row = 0; row < 8; row++){
-            for (int col = 0; col < 8; col++){
+        for (int row = 1; row < 9; row++){
+            for (int col = 1; col < 9; col++){
                 Piece piece = board.getPiece(new Position(row, col));
-                squares[row][col].setPiece(piece);
+                squares[row-1][col-1].setPiece(piece);
             }
         }
     }
