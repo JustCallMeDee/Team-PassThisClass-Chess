@@ -2,7 +2,7 @@ package Player;
 
 import Utils.Color;
 import Pieces.*;
-import Board.Position;
+import Board.*;
 import java.util.ArrayList;
 
 /**
@@ -21,7 +21,7 @@ public class Player {
      * A list of all pieces currently owned by the player
      */
     ArrayList<Piece> pieces;
-    //Current board
+    Board board;
 
     public Player(Color color, ArrayList<Piece> pieces) {
         this.color = color;
@@ -92,15 +92,15 @@ public class Player {
      * Gets the board the player is on
      * @return The board the player is on
      */
-    public void getBoard(){
-        //Unimplemented
+    public Board getBoard(){
+        return board;
     }
 
     /**
      * Sets the board the player is on
      */
-    public void setBoard(){
-        //Unimplemented
+    public void setBoard(Board board){
+        this.board = board;
     }
 
     /**

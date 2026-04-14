@@ -12,6 +12,7 @@ public class Board {
 
     public Board(){
         whitePlayer = new Player(Color.WHITE);
+        whitePlayer.setBoard(this);
         blackPlayer = new Player(Color.BLACK);
         initializeBoard();
     }

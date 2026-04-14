@@ -36,29 +36,10 @@ public class Rook extends Piece{
         ArrayList<Position> positions = new ArrayList<Position>();
         Position check;
         boolean capture = false;
-        //Check all forizontal moves to the right. When one position is invalid, stop the loop 
-        for(int i = this.getPosition().getRow() + 1; i <= this.getPosition().getRow() + 8; i++){
+        //Check all positions to the right, stopping when an error is thrown, or a piece is captured
+        for(int i = 1; i <= 8; i++){
             try {
-                check = new Position(i, this.getPosition().getColumn());
-                if(getPlayer().findPieceAt(check) != null){
-                    throw new IllegalArgumentException();
-                }            
-                //Todo: If leaves in check, continue loop
-                //Todo: Check if there is a capture, set capture to that
-                positions.add(check);
-                if(capture){
-                    break;
-                }
-            } catch (Exception e) {
-                break;
-            }
-        }
-        
-        capture = false;
-        //Next loops is for horizontal to the left, then vertical up and down
-        for(int i = this.getPosition().getRow() - 1; i >= this.getPosition().getRow() - 8; i--){
-            try {
-                check = new Position(i, this.getPosition().getColumn());
+                check = new Position(this.getPosition().getRow() + i, (char)(this.getPosition().getColumn()));
                 if(getPlayer().findPieceAt(check) != null){
                     throw new IllegalArgumentException();
                 }            
@@ -73,10 +54,11 @@ public class Rook extends Piece{
             }
         }
 
+        //Checks all positions to the left
         capture = false;
-        for(int j = this.getPosition().getColumn() + 1; j <= this.getPosition().getColumn() + 8; j++){
+        for(int i = 1; i <= 8; i++){
             try {
-                check = new Position(this.getPosition().getRow(), j);
+                check = new Position(this.getPosition().getRow() - i, (char)(this.getPosition().getColumn()));
                 if(getPlayer().findPieceAt(check) != null){
                     throw new IllegalArgumentException();
                 }            
@@ -91,10 +73,30 @@ public class Rook extends Piece{
             }
         }
 
+        //Check all positions north
         capture = false;
-        for(int j = this.getPosition().getColumn() - 1; j >= this.getPosition().getColumn() - 8; j--){
+        for(int i = 1; i <= 8; i++){
             try {
-                check = new Position(this.getPosition().getRow(), j);
+                check = new Position(this.getPosition().getRow(), (char)(this.getPosition().getColumn() + i));
+                if(getPlayer().findPieceAt(check) != null){
+                    throw new IllegalArgumentException();
+                }            
+                //Todo: If leaves in check, continue loop
+                //Todo: Check if there is a capture, set capture to that
+                positions.add(check);
+                if(capture){
+                    break;
+                }
+            } catch (Exception e) {
+                break;
+            }
+        }
+
+        //Check all positions south
+        capture = false;
+        for(int i = 1; i <= 8; i++){
+            try {
+                check = new Position(this.getPosition().getRow(), (char)(this.getPosition().getColumn() - i));
                 if(getPlayer().findPieceAt(check) != null){
                     throw new IllegalArgumentException();
                 }            
