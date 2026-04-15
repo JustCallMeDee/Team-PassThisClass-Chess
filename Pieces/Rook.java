@@ -1,7 +1,6 @@
 package Pieces;
 
 import java.util.ArrayList;
-import java.io.Serializable;
 import Utils.Color;
 import Player.Player;
 import Board.Position;
@@ -11,10 +10,6 @@ import Board.Position;
  * @author Dee Quinn
  * @see {@link Piece}
  */
-
-public class Piece implements Serializable{
-    private static final long serialVersionUID = 1L;
-}
 
 public class Rook extends Piece{
     private boolean hasMoved = false;

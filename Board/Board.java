@@ -6,14 +6,13 @@ import Utils.Color;
 import Pieces.*;
 import Player.Player;
 
-public class Board {
+public class Board implements Serializable{
+    private static final long serialVersionUID = 1L;
+
+
     private Position[][] board = new Position[8][8];
     private Player whitePlayer;
     private Player blackPlayer;
-
-public class Board implements Serializable{
-    private static final long serialVersionUID = 1L;
-}
 
     public Board(){
         whitePlayer = new Player(Color.WHITE);

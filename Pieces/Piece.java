@@ -12,11 +12,8 @@ import java.io.Serializable;
  * @see {@link Board.Position}
  */
 
-public class Piece implements Serializable{
+public abstract class Piece implements Serializable{
     private static final long serialVersionUID = 1L;
-}
-
-public abstract class Piece {
     
     private Player player;
 

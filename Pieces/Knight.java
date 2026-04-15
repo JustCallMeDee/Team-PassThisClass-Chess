@@ -1,7 +1,6 @@
 package Pieces;
 
 import java.util.ArrayList;
-import java.io.Serializable;
 import Board.Position;
 import Utils.Color;
 import Player.Player;
@@ -11,10 +10,6 @@ import Player.Player;
  * @author Dee Quinn
  * @see {@link Piece}
  */
-
-public class Piece implements Serializable{
-    private static final long serialVersionUID = 1L;
-}
 
 public class Knight extends Piece{
 
