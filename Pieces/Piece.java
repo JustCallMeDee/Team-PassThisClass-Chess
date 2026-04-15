@@ -4,13 +4,18 @@ import Board.Position;
 import Player.Player;
 import Utils.Color;
 import java.util.ArrayList;
-
+import java.io.Serializable;
 /**
  * An abstract class that represents a chess piece.
  * 
  * @author Dee Quinn
  * @see {@link Board.Position}
  */
+
+public class Piece implements Serializable{
+    private static final long serialVersionUID = 1L;
+}
+
 public abstract class Piece {
     
     private Player player;
