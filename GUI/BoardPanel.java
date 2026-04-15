@@ -81,24 +81,35 @@ public class BoardPanel extends JPanel {
         }
     }
 
-    public void saveGame(){
-        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("chess.save"))){
-            out.writeObject(board);
-            JOptionPane.showMessageDialog(this, "Game Saved.");
-        } catch (Exception e){
-            e.printStackTrace();
-        }
+    public void saveGame() {
+    JFileChooser chooser = new JFileChooser();
+    chooser.setSelectedFile(new File("chess.save"));
+    if (chooser.showSaveDialog(this) != JFileChooser.APPROVE_OPTION) return;
+
+    try (ObjectOutputStream out = new ObjectOutputStream(
+            new FileOutputStream(chooser.getSelectedFile()))) {
+        out.writeObject(board);
+        JOptionPane.showMessageDialog(this, "Game Saved.");
+    } catch (Exception e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(this, "Save failed: " + e.getMessage());
     }
+}
 
     public void loadGame() {
-        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("chess.save"))){
-            board = (Board) in.readObject();
-            setBoard(board);
-            JOptionPane.showMessageDialog(this, "Game Loaded.");
-        } catch (Exception e){
-            e.printStackTrace();
-        }
+    JFileChooser chooser = new JFileChooser();
+    if (chooser.showOpenDialog(this) != JFileChooser.APPROVE_OPTION) return;
+
+    try (ObjectInputStream in = new ObjectInputStream(
+            new FileInputStream(chooser.getSelectedFile()))) {
+        board = (Board) in.readObject();
+        setBoard(board);
+        JOptionPane.showMessageDialog(this, "Game Loaded.");
+    } catch (Exception e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(this, "Load failed: " + e.getMessage());
     }
+}
 
     public void updateColors(Color light, Color dark){
         this.lightColor = light;
