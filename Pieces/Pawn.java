@@ -4,12 +4,18 @@ import java.util.ArrayList;
 import Player.Player;
 import Utils.Color;
 import Board.Position;
+import java.io.Serializable;
 /**
  * Represents a pawn piece from a chess board
  * 
  * @author Dee Quinn
  * @see {@link Piece}
  */
+
+public class Piece implements Serializable{
+    private static final long serialVersionUID = 1L;
+}
+
 public class Pawn extends Piece{
     /**
      * Tracks if the piece has moved or not
