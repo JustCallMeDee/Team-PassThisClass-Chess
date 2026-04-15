@@ -53,15 +53,15 @@ public class BoardPanel extends JPanel {
         if (selected == null){
             selected = pos;
         } else {
-            board.movePiece(selected, pos);
 
-            Piece piece = board.getPiece(pos);
-            if (piece != null && piece.toString().equalsIgnoreCase("bK")){
+            Piece target = board.getPiece(pos);
+            if (target != null && target.toString().equalsIgnoreCase("bK")){
                 showWinner("White Wins!");
             }
-            if (piece != null && piece.toString().equalsIgnoreCase("wK")){
+            if (target != null && target.toString().equalsIgnoreCase("wK")){
                 showWinner("Black Wins!");
             }
+            board.movePiece(selected, pos);
             selected = null;
             refreshBoard();
         }
