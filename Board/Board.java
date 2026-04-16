@@ -1,17 +1,22 @@
 package Board;
 
+import java.io.Serializable;
 import java.util.List;
 import Utils.Color;
 import Pieces.*;
 import Player.Player;
 
-public class Board {
+public class Board implements Serializable{
+    private static final long serialVersionUID = 1L;
+
+
     private Position[][] board = new Position[8][8];
     private Player whitePlayer;
     private Player blackPlayer;
 
     public Board(){
         whitePlayer = new Player(Color.WHITE);
+        whitePlayer.setBoard(this);
         blackPlayer = new Player(Color.BLACK);
         initializeBoard();
     }

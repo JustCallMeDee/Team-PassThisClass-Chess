@@ -1,7 +1,6 @@
 package Pieces;
 
 import java.util.ArrayList;
-
 import Board.Position;
 import Utils.Color;
 import Player.Player;
@@ -11,6 +10,7 @@ import Player.Player;
  * @author Dee Quinn
  * @see {@link Piece}
  */
+
 public class Knight extends Piece{
 
     public Knight(Player player, Position pos) {
@@ -30,7 +30,7 @@ public class Knight extends Piece{
         int row = this.getPosition().getRow() + 2;
         Position check;
         try{
-            check = new Position(row, this.getPosition().getColumn() + 1);
+            check = new Position(row, (char)(this.getPosition().getColumn() + 1));
             if(getPlayer().findPieceAt(check) != null){
                 throw new IllegalArgumentException();
             }            
@@ -42,7 +42,7 @@ public class Knight extends Piece{
         }
 
         try {
-            check = new Position(row, this.getPosition().getColumn() - 1);
+            check = new Position(row, (char)(this.getPosition().getColumn() - 1));
             if(getPlayer().findPieceAt(check) != null){
                 throw new IllegalArgumentException();
             }            
@@ -54,7 +54,7 @@ public class Knight extends Piece{
 
         row = this.getPosition().getRow() - 2;
         try {
-            check = new Position(row, this.getPosition().getColumn() + 1);
+            check = new Position(row, (char)(this.getPosition().getColumn() + 1));
             if(getPlayer().findPieceAt(check) != null){
                 throw new IllegalArgumentException();
             }            
@@ -65,7 +65,7 @@ public class Knight extends Piece{
         }
 
         try {
-            check = new Position(row, this.getPosition().getColumn() - 1);
+            check = new Position(row, (char)(this.getPosition().getColumn() - 1));
             if(getPlayer().findPieceAt(check) != null){
                 throw new IllegalArgumentException();
             }            
@@ -74,7 +74,6 @@ public class Knight extends Piece{
         } catch (IllegalArgumentException e) {
             // TODO: handle exception
         }
-
 
         char column = (char)(this.getPosition().getColumn() + 2);
         try {

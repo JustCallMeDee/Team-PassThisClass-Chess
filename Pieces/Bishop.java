@@ -1,7 +1,6 @@
 package Pieces;
 
 import java.util.ArrayList;
-
 import Board.Position;
 import Utils.Color;
 import Player.Player;
@@ -11,6 +10,7 @@ import Player.Player;
  * @author Dee Quinn
  * @see {@link Piece}
  */
+
 public class Bishop extends Piece{
 
     public Bishop(Player player, Position pos) {
@@ -28,7 +28,7 @@ public class Bishop extends Piece{
         //North-east
         for(int i = 1; i <= 8; i++){
             try {
-                check = new Position(this.getPosition().getRow() + i, this.getPosition().getColumn() + i);
+                check = new Position(this.getPosition().getRow() + i, (char)(this.getPosition().getColumn() + i));
                 if(getPlayer().findPieceAt(check) != null){
                     throw new IllegalArgumentException();
                 }            
@@ -47,7 +47,7 @@ public class Bishop extends Piece{
         capture = false;
         for(int i = 1; i <= 8; i++){
             try {
-                check = new Position(this.getPosition().getRow() + i, this.getPosition().getColumn() - i);
+                check = new Position(this.getPosition().getRow() + i, (char)(this.getPosition().getColumn() - i));
                 if(getPlayer().findPieceAt(check) != null){
                     throw new IllegalArgumentException();
                 }            
@@ -66,7 +66,7 @@ public class Bishop extends Piece{
         capture = false;
         for(int i = 1; i <= 8; i++){
             try {
-                check = new Position(this.getPosition().getRow() - i, this.getPosition().getColumn() + i);
+                check = new Position(this.getPosition().getRow() - i, (char)(this.getPosition().getColumn() + i));
                 if(getPlayer().findPieceAt(check) != null){
                     throw new IllegalArgumentException();
                 }            
@@ -85,7 +85,7 @@ public class Bishop extends Piece{
         capture = false;
         for(int i = 1; i <= 8; i++){
             try {
-                check = new Position(this.getPosition().getRow() - i, this.getPosition().getColumn() - i);
+                check = new Position(this.getPosition().getRow() - i, (char)(this.getPosition().getColumn() + i));
                 if(getPlayer().findPieceAt(check) != null){
                     throw new IllegalArgumentException();
                 }            

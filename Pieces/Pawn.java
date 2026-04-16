@@ -10,6 +10,7 @@ import Board.Position;
  * @author Dee Quinn
  * @see {@link Piece}
  */
+
 public class Pawn extends Piece{
     /**
      * Tracks if the piece has moved or not
@@ -44,6 +45,8 @@ public class Pawn extends Piece{
 
         //Check moving spaces first
         Position check;
+
+        //Check color, and adjust way to move based on it
         int moveModifier = getColor() == Color.WHITE ? -1 : 1;
         try{
             check = new Position(this.getPosition().getRow() + moveModifier, this.getPosition().getColumn());
@@ -76,20 +79,30 @@ public class Pawn extends Piece{
         //Unimplemented: Needs board to be done
         //DEBUG STATEMENTS
         //boolean pieceLeft = true, pieceRight = false; 
-/*
         //Since a piece already occupies the spaces we are checking, only need to check if king is in check
-        if(pieceLeft){
-            check = new Position(this.getPosition().getRow() + moveModifier, this.getPosition().getColumn() - 1);
-            //TODO: Check if check
-            positions.add(check);
+        try {
+            check = new Position(this.getPosition().getRow() + moveModifier, (char)(this.getPosition().getColumn() + 1));
+            System.out.println("[" + check.getColumn() + check.getRow() + "]");
+            Piece checkPiece = getPlayer().getBoard().getPiece(check);
+            if(checkPiece != null && checkPiece.getColor() != getColor()){
+                //TODO: Check if in check
+                positions.add(check);
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
         }
 
-        if(pieceRight){
-            check = new Position(this.getPosition().getRow() + moveModifier, this.getPosition().getColumn() + 1);
-            //TODO: Check if check
-            positions.add(check);
+        try {
+            check = new Position(this.getPosition().getRow() + moveModifier, (char)(this.getPosition().getColumn() - 1));
+            System.out.println("[" + check.getColumn() + check.getRow() + "]");
+            Piece checkPiece = getPlayer().getBoard().getPiece(check);
+            if(checkPiece != null && checkPiece.getColor() != getColor()){
+                //TODO: Check if in check
+                positions.add(check);
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
         }
-*/
 
         return positions;
     }

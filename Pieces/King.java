@@ -1,7 +1,6 @@
 package Pieces;
 
 import java.util.ArrayList;
-
 import Board.Position;
 import Utils.Color;
 import Player.Player;
@@ -11,7 +10,9 @@ import Player.Player;
  * @author Dee Quinn
  * @see {@link Piece}
  */
+
 public class King extends Piece{
+
     private boolean hasMoved = false;
 
     public King(Player player, Position pos) {
