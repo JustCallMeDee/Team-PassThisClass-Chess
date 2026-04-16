@@ -4,11 +4,15 @@ import javax.swing.*;
 import java.awt.*;
 
 public class SettingsDialog extends JDialog {
+    Color light, dark;
 
     public SettingsDialog(BoardPanel boardPanel){
         setTitle("Settings");
         setSize(300, 300);
         setLayout(new GridLayout(7, 1));
+
+        light = boardPanel.getLightColor();
+        dark = boardPanel.getDarkColor();
 
         JButton lightColorBtn = new JButton("Change Light theme");
         JButton darkColorBtn = new JButton("Change Dark theme");
@@ -22,20 +26,17 @@ public class SettingsDialog extends JDialog {
              "Orange", "Pink", "Purple", "Red", "White", "Yellow"});
         JButton applyBtn = new JButton("Apply");
 
-        final Color[] light = {Color.WHITE};
-        final Color[] dark = {Color.GRAY};
-
         lightColorBtn.addActionListener(e -> {
-            light[0] = JColorChooser.showDialog(this, "Choose Light theme", light[0]);
+            light = JColorChooser.showDialog(this, "Choose Light theme", light);
         });
 
         darkColorBtn.addActionListener(e -> {
-            dark[0] = JColorChooser.showDialog(this, "Choose Dark theme", dark[0]);
+            dark = JColorChooser.showDialog(this, "Choose Dark theme", dark);
         });
 
         applyBtn.addActionListener(e -> {
-            System.out.println(setFirstColor.getSelectedItem() + " " + setFirstColor.getSelectedItem());
-            boardPanel.updateColors(light[0], dark[0], (String)(setFirstColor.getSelectedItem()), (String)(setSecondColor.getSelectedItem()));
+            //System.out.println(setFirstColor.getSelectedItem() + " " + setFirstColor.getSelectedItem());
+            boardPanel.updateColors(light, dark, (String)(setFirstColor.getSelectedItem()), (String)(setSecondColor.getSelectedItem()));
         });
 
         add(lightColorBtn);

@@ -15,6 +15,15 @@ public class BoardPanel extends JPanel {
 
     private Color lightColor = new Color(240, 217, 181);
     private Color darkColor = new Color(181, 136, 99);
+    
+    public Color getLightColor() {
+        return lightColor;
+    }
+
+    public Color getDarkColor() {
+        return darkColor;
+    }
+
     private String player1Color = "White";
     private String player2Color = "Black";
 
