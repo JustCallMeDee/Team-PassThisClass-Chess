@@ -10,6 +10,7 @@ public class SquarePanel extends JButton {
     private JLabel imageLabel;
     private final String PATH_TO_PIECE_VISUALS = "C:\\Users\\dalto\\OneDrive\\Desktop\\Programs\\Java\\Chess\\GUI\\PieceVisual\\";
     private String colorPath;
+    private String piecePath;
     private int size = 65;
 
     public SquarePanel(int row, int col, Color color){
@@ -23,39 +24,61 @@ public class SquarePanel extends JButton {
         colorPath = "Black\\";
     }
 
+    public String getImagePath(){
+        return PATH_TO_PIECE_VISUALS + colorPath + piecePath;
+    }
+
     public int getRow() {return row;}
     public int getCol() {return col;}
 
     public void setPiece(Piece piece){
         if (piece == null) {
-            imageLabel.setIcon(new ImageIcon());
+            piecePath = "";
         } else {
             //Switch case to set correct path
-            String fullPath = PATH_TO_PIECE_VISUALS + colorPath;
             switch (piece.toString().charAt(1)) {
                 case 'P':
-                    fullPath += "pawn.png\\";
+                    piecePath = "pawn.png\\";
                     break;
                 case 'N':
-                    fullPath += "knight.png\\";
+                    piecePath = "knight.png\\";
                     break;
                 case 'B':
-                    fullPath += "bishop.png\\";
+                    piecePath = "bishop.png\\";
                     break;
                 case 'R':
-                    fullPath += "rook.png\\";
+                    piecePath = "rook.png\\";
                     break;
                 case 'Q':
-                    fullPath += "queen.png\\";
+                    piecePath = "queen.png\\";
                     break;
                 case 'K':
-                    fullPath += "king.png\\";
+                    piecePath = "king.png\\";
                     break;
                 default:
                     break;
             }
-            imageLabel.setIcon(new ImageIcon(new ImageIcon(fullPath).getImage()
+
+            updateImage();
+        }
+    }
+
+    private void updateImage(){
+        if(piecePath == ""){
+            imageLabel.setIcon(new ImageIcon());            
+        }
+        else{
+            imageLabel.setIcon(new ImageIcon(new ImageIcon(getImagePath()).getImage()
                                .getScaledInstance(size, size, Image.SCALE_SMOOTH)));
         }
+    }
+
+    public String getColor(){
+        return colorPath.substring(0, colorPath.length() - 3);
+    }
+
+    public void setColor(String color){
+        colorPath = color + "\\";
+        updateImage();
     }
 }
