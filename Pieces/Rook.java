@@ -1,7 +1,6 @@
 package Pieces;
 
 import java.util.ArrayList;
-
 import Utils.Color;
 import Player.Player;
 import Board.Position;
@@ -11,6 +10,7 @@ import Board.Position;
  * @author Dee Quinn
  * @see {@link Piece}
  */
+
 public class Rook extends Piece{
     private boolean hasMoved = false;
 

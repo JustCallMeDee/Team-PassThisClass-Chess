@@ -1,7 +1,6 @@
 package Pieces;
 
 import java.util.ArrayList;
-
 import Board.Position;
 import Utils.Color;
 import Player.Player;
@@ -11,6 +10,7 @@ import Player.Player;
  * @author Dee Quinn
  * @see {@link Piece}
  */
+
 public class Queen extends Piece{
 
     public Queen(Player player, Position pos) {
