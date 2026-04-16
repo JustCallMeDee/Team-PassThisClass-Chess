@@ -10,7 +10,7 @@ public class SquarePanel extends JButton {
     private JLabel imageLabel;
     private final String PATH_TO_PIECE_VISUALS = "C:\\Users\\dalto\\OneDrive\\Desktop\\Programs\\Java\\Chess\\GUI\\PieceVisual\\";
     private String colorPath;
-    private int size = 75;
+    private int size = 65;
 
     public SquarePanel(int row, int col, Color color){
         this.row = row;
@@ -54,7 +54,8 @@ public class SquarePanel extends JButton {
                 default:
                     break;
             }
-            imageLabel.setIcon(new ImageIcon(new ImageIcon(fullPath).getImage().getScaledInstance(size, size, Image.SCALE_AREA_AVERAGING)));
+            imageLabel.setIcon(new ImageIcon(new ImageIcon(fullPath).getImage()
+                               .getScaledInstance(size, size, Image.SCALE_SMOOTH)));
         }
     }
 }
