@@ -16,3 +16,5 @@ Inca Kritselis (rtk30)
 
 Matt Diaz (kmq27)
 
+
+Piece visuals created by Brian Provan (https://opengameart.org/content/colorful-chess-pieces)
