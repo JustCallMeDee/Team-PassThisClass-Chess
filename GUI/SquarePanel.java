@@ -20,8 +20,6 @@ public class SquarePanel extends JButton {
         imageLabel = new JLabel();
         imageLabel.setIcon(new ImageIcon());
         this.add(imageLabel);
-        //setFont(new Font("Arial", Font.BOLD, 18));
-        colorPath = "Black\\";
     }
 
     public String getImagePath(){
@@ -65,7 +63,7 @@ public class SquarePanel extends JButton {
 
     private void updateImage(){
         if(piecePath == ""){
-            imageLabel.setIcon(new ImageIcon());            
+            imageLabel.setIcon(null);            
         }
         else{
             imageLabel.setIcon(new ImageIcon(new ImageIcon(getImagePath()).getImage()
