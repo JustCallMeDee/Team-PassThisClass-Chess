@@ -18,6 +18,7 @@ public class Board implements Serializable{
         whitePlayer = new Player(Color.WHITE);
         whitePlayer.setBoard(this);
         blackPlayer = new Player(Color.BLACK);
+        blackPlayer.setBoard(this);
         initializeBoard();
     }
 
@@ -161,7 +162,8 @@ public class Board implements Serializable{
     }
 
     public boolean isCheck(Position moveStart, Position moveEnd) {
-        Piece movingPiece = getPiece(moveStart);
+        return false;
+        /*Piece movingPiece = getPiece(moveStart);
         if (movingPiece == null) {
             return false;
         }
@@ -190,6 +192,7 @@ public class Board implements Serializable{
         }
 
         return result;
+        */
     }
 
     public boolean isCheckmate() {
