@@ -56,9 +56,8 @@ public class SquarePanel extends JButton {
                 default:
                     break;
             }
-
-            updateImage();
         }
+        updateImage();
     }
 
     private void updateImage(){
