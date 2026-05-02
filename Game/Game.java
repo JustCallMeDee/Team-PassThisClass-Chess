@@ -4,20 +4,41 @@ import java.util.Scanner;
 
 import Board.Board;
 import Board.Position;
+import GUI.ChessGUI;
 import Utils.Color;
 import Utils.Utils;
-import Pieces.Piece;
 
 public class Game {
     private Board board;
+    private ChessGUI gui;
     private Color currentTurn;
 
     public Game() {
         board = new Board();
         currentTurn = Color.WHITE;
+        gui = new ChessGUI(board, currentTurn, this);
     }
 
-    public void play() {
+    public void playGUI(){
+        if (gui == null) {
+            gui = new ChessGUI(board, currentTurn, this);
+        }
+        gui.setVisible(true);
+    }
+
+    public void setCurrentTurn(Color currentTurn) {
+        this.currentTurn = currentTurn;
+    }
+
+    public Color getCurrentTurn() {
+        return currentTurn;
+    }
+
+    public void playConsole() {
+        if (gui != null) {
+            gui.setVisible(false);
+        }
+
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
 
@@ -52,13 +73,15 @@ public class Game {
                 continue;
             }
 
-            //System.out.println("|" + from.getColumn() + from.getRow() + "  " + to.getColumn() + to.getRow());
             boolean moved = board.movePiece(from, to);
 
             if (moved) {
                 currentTurn = (currentTurn == Color.WHITE)
                         ? Color.BLACK
                         : Color.WHITE;
+                if (gui != null) {
+                    gui.setCurrentTurn(currentTurn);
+                }
             } else {
                 System.out.println("Invalid move.");
             }

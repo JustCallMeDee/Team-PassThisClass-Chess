@@ -12,6 +12,7 @@ public class BoardPanel extends JPanel {
 	private Board board;
 	private SquarePanel[][] squares;
 	private Position selected;
+	private ChessGUI gui;
 
 	private Color lightColor = new Color(240, 217, 181);
 	private Color darkColor = new Color(181, 136, 99);
@@ -28,7 +29,12 @@ public class BoardPanel extends JPanel {
 	private String player2Color = "Black";
 
 	public BoardPanel(Board board) {
+		this(board, null);
+	}
+
+	public BoardPanel(Board board, ChessGUI gui) {
 		this.board = board;
+		this.gui = gui;
 		setLayout(new GridLayout(8, 8));
 		squares = new SquarePanel[8][8];
 
@@ -37,6 +43,7 @@ public class BoardPanel extends JPanel {
 
 	public void setBoard(Board board) {
 		this.board = board;
+		selected = null;
 		removeAll();
 		initBoard();
 		revalidate();
@@ -58,16 +65,44 @@ public class BoardPanel extends JPanel {
 		refreshBoard();
 	}
 
+	private Utils.Color getCurrentTurn() {
+		return gui == null ? Utils.Color.WHITE : gui.getCurrentTurn();
+	}
+
 	private void handleClick(SquarePanel square) {
 		Position pos = new Position(square.getRow(), square.getCol());
+		Piece clickedPiece = board.getPiece(pos);
 
 		if (selected == null) {
+			if (clickedPiece == null) {
+				return;
+			}
+
+			if (clickedPiece.getColor() != getCurrentTurn()) {
+				return;
+			}
+
 			selected = pos;
-		} else {
+			return;
+		}
 
-			Piece targetBeforeMove = board.getPiece(pos);
-			board.movePiece(selected, pos);
+		Piece movingPiece = board.getPiece(selected);
+		if (movingPiece == null) {
+			selected = null;
+			return;
+		}
 
+		if (clickedPiece != null && clickedPiece.getColor() == movingPiece.getColor()) {
+			if (clickedPiece.getColor() == getCurrentTurn()) {
+				selected = pos;
+			}
+			return;
+		}
+
+		Piece targetBeforeMove = board.getPiece(pos);
+		boolean moved = board.movePiece(selected, pos);
+
+		if (moved) {
 			if (targetBeforeMove != null) {
 				if (targetBeforeMove.toString().equalsIgnoreCase("bK")) {
 					showWinner("White Wins!");
@@ -75,9 +110,13 @@ public class BoardPanel extends JPanel {
 					showWinner("Black Wins!");
 				}
 			}
-			selected = null;
-			refreshBoard();
+
+			if (gui != null) {
+				gui.toggleTurn();
+			}
 		}
+		selected = null;
+		refreshBoard();
 	}
 
 	private void showWinner(String message) {
@@ -89,7 +128,7 @@ public class BoardPanel extends JPanel {
 		for (int row = 1; row < 9; row++) {
 			for (int col = 1; col < 9; col++) {
 				Piece piece = board.getPiece(new Position(row, col));
-				if(piece != null && (Utils.Color)(piece.getColor()) == (Utils.Color.WHITE)) {
+				if(piece != null && piece.getColor() == Utils.Color.WHITE) {
 					squares[row-1][col-1].setColor(player1Color);
 				}
 				else {
@@ -107,7 +146,7 @@ public class BoardPanel extends JPanel {
 
 		try (ObjectOutputStream out = new ObjectOutputStream(
 			    new FileOutputStream(chooser.getSelectedFile()))) {
-			out.writeObject(board);
+			out.writeObject(new SavedGameState(board, getCurrentTurn()));
 			JOptionPane.showMessageDialog(this, "Game Saved.");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -121,7 +160,20 @@ public class BoardPanel extends JPanel {
 
 		try (ObjectInputStream in = new ObjectInputStream(
 			    new FileInputStream(chooser.getSelectedFile()))) {
-			board = (Board) in.readObject();
+			Object loaded = in.readObject();
+
+			if (loaded instanceof SavedGameState) {
+				SavedGameState state = (SavedGameState) loaded;
+				board = state.board;
+				selected = null;
+				if (gui != null) {
+					gui.setCurrentTurn(state.currentTurn);
+				}
+			} else if (loaded instanceof Board) {
+				board = (Board) loaded;
+				selected = null;
+			}
+
 			setBoard(board);
 			JOptionPane.showMessageDialog(this, "Game Loaded.");
 		} catch (Exception e) {
@@ -136,5 +188,16 @@ public class BoardPanel extends JPanel {
 		this.player1Color = player1Color;
 		this.player2Color = player2Color;
 		setBoard(board);
+	}
+
+	private static class SavedGameState implements Serializable {
+		private static final long serialVersionUID = 1L;
+		private final Board board;
+		private final Utils.Color currentTurn;
+
+		private SavedGameState(Board board, Utils.Color currentTurn) {
+			this.board = board;
+			this.currentTurn = currentTurn;
+		}
 	}
 }
