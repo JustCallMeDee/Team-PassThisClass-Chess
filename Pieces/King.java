@@ -17,7 +17,7 @@ public class King extends Piece{
 
     public King(Player player, Position pos) {
         super(player, pos);
-        //TODO Auto-generated constructor stub
+        //TOD
     }
 
     public boolean getHasMoved(){
@@ -35,35 +35,31 @@ public class King extends Piece{
 
     @Override
     public ArrayList<Position> possibleMoves() {
-        ArrayList<Position> positions = new ArrayList<Position>();
+        ArrayList<Position> moves = new ArrayList<>();
 
-        int row = this.getPosition().getRow();
-        char column = this.getPosition().getColumn();
+        for (int r = -1; r <= 1; r++) {
+            for (int c = -1; c <= 1; c++) {
 
-        for(int i = row-1; i<row+1; i++){
-            for(char j = (char)(column-1); j < (char)(column+1); j++){
-                try{
-                    Position check = new Position(i, j);
+               if (r == 0 && c == 0) continue;
 
-                    //Check every condition that would invalidate the move.
-                    //If it is invalid, skip this itteration of the loop  
-                    if(check.getRow() == this.getPosition().getRow()
-                            && check.getColumn() == this.getPosition().getColumn()){
-                        throw new IllegalArgumentException();
+                try {
+                    Position next = new Position(
+                        getPosition().getRow() + r,
+                        (char)(getPosition().getColumn() + c)
+                    );
+
+                    Piece piece = getPlayer().getBoard().getPiece(next);
+
+                    if ((piece == null || piece.getColor() != getColor())
+                         && !leavesKingInCheck(next)) {
+                        moves.add(next);
                     }
-                    if(getPlayer().findPieceAt(check) != null){
-                        throw new IllegalArgumentException();
-                    }    
-                    //TODO: Check if in check
-                    positions.add(check);
-                }
-                catch (IllegalArgumentException e){
-                    continue;
-                }
+
+             } catch (IllegalArgumentException e) {}
             }
         }
-        
-        return positions;
+
+        return moves;
     }
     
     @Override
