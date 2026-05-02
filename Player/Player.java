@@ -1,8 +1,10 @@
 package Player;
 
 import Utils.Color;
+
 import Pieces.*;
 import Board.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
@@ -13,7 +15,8 @@ import java.util.ArrayList;
  * @see {@link Pieces.Piece}
  * @see {@link java.util.ArrayList}
  */
-public class Player {
+public class Player implements Serializable{
+    private static final long serialVersionUID = 1L;
     /**
      * The current color of the player
      */
