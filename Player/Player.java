@@ -7,6 +7,7 @@ import Board.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+
 /**
  * Represents a player in a chess game. 
  * 
@@ -19,10 +20,11 @@ public class Player implements Serializable{
     /**
      * The current color of the player
      */
-    Color color;
+    private Color color;
     /**
      * A list of all pieces currently owned by the player
      */
+
     ArrayList<Piece> pieces;
     Board board;
 
@@ -42,7 +44,7 @@ public class Player implements Serializable{
      * @param color The color of the pieces
      * @return An array list of pieces in standard positions
      */
-    /*
+    
     private ArrayList<Piece> createStandardPieceSetup(Color color) {
         ArrayList<Piece> board = new ArrayList<Piece>();
         if(color == Color.WHITE){
@@ -74,7 +76,7 @@ public class Player implements Serializable{
 
         return board;
     }
-*/
+
     /**
      * Gets the color of the player
      * @return The color of the player

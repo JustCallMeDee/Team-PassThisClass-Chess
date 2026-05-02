@@ -19,7 +19,7 @@ public class Pawn extends Piece{
 
     public Pawn(Player player, Position pos) {
         super(player, pos);
-        //TODO Auto-generated constructor stub
+        //TOD
     }
 
     /**
@@ -41,70 +41,49 @@ public class Pawn extends Piece{
     
     @Override
     public ArrayList<Position> possibleMoves() {
-        ArrayList<Position> positions = new ArrayList<Position>();
-
-        //Check moving spaces first
-        Position check;
-
-        //Check color, and adjust way to move based on it
-        int moveModifier = getColor() == Color.WHITE ? -1 : 1;
-        try{
-            check = new Position(this.getPosition().getRow() + moveModifier, this.getPosition().getColumn());
-            if(getPlayer().findPieceAt(check) != null){
-                throw new IllegalArgumentException();
-            }
-            //TODO: Check if this leaves them in check
-            positions.add(check);
-        }
-        catch (IllegalArgumentException e){
-            //yup
-        }
-
-        if(!hasMoved){
-            try{
-                check = new Position(this.getPosition().getRow() + (2 * moveModifier), this.getPosition().getColumn());
-                if(getPlayer().findPieceAt(check) != null){
-                    throw new IllegalArgumentException();
-                }                
-                //TODO: Check if this leaves them in check
-                positions.add(check);
-            }
-            catch (IllegalArgumentException e){
-                //yup
-            }
-        }
-
-        //Now check if there is opposing pieces to the front diagonals
-        //If so, add those
-        //Unimplemented: Needs board to be done
-        //DEBUG STATEMENTS
-        //boolean pieceLeft = true, pieceRight = false; 
-        //Since a piece already occupies the spaces we are checking, only need to check if king is in check
-        try {
-            check = new Position(this.getPosition().getRow() + moveModifier, (char)(this.getPosition().getColumn() + 1));
-            System.out.println("[" + check.getColumn() + check.getRow() + "]");
-            Piece checkPiece = getPlayer().getBoard().getPiece(check);
-            if(checkPiece != null && checkPiece.getColor() != getColor()){
-                //TODO: Check if in check
-                positions.add(check);
-            }
-        } catch (Exception e) {
-            // TODO: handle exception
-        }
+        ArrayList<Position> moves = new ArrayList<>();
+        int dir = (getColor() == Color.WHITE) ? -1 : 1;
 
         try {
-            check = new Position(this.getPosition().getRow() + moveModifier, (char)(this.getPosition().getColumn() - 1));
-            System.out.println("[" + check.getColumn() + check.getRow() + "]");
-            Piece checkPiece = getPlayer().getBoard().getPiece(check);
-            if(checkPiece != null && checkPiece.getColor() != getColor()){
-                //TODO: Check if in check
-                positions.add(check);
+            Position one = new Position(getPosition().getRow() + dir, getPosition().getColumn());
+
+            if (getPlayer().getBoard().getPiece(one) == null) {
+
+                if (!leavesKingInCheck(one)){
+                    moves.add(one);
+                }
+
+                if (!hasMoved) {
+                    Position two = new Position(getPosition().getRow() + 2 * dir, getPosition().getColumn());
+                    
+                    if (getPlayer().getBoard().getPiece(two) == null &&
+                           !leavesKingInCheck(two)){
+                        moves.add(two);
+                    }
+                }
             }
-        } catch (Exception e) {
-            // TODO: handle exception
+        } catch (IllegalArgumentException e) {}
+
+        int[] cols = {1, -1};
+
+    for (int c : cols){
+            try {
+                Position diag = new Position(
+                    getPosition().getRow() + dir,
+                    (char)(getPosition().getColumn() + c)
+                );
+
+                Piece p = getPlayer().getBoard().getPiece(diag);
+
+                if (p != null && p.getColor() != getColor()
+                        && !leavesKingInCheck(diag)) {
+                    moves.add(diag);
+                }
+
+            } catch (IllegalArgumentException e) {}
         }
 
-        return positions;
+        return moves;
     }
 
     @Override

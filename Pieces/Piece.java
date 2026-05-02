@@ -45,6 +45,11 @@ public abstract class Piece implements Serializable{
         return pos;
     }
 
+    //NEW//
+    public boolean leavesKingInCheck(Position newPos) {
+        return getPlayer().getBoard().isCheck(getPosition(), newPos);
+    }
+
     /**
      * Attempts to move the piece to a new position. If unsuccessful, returns false. Otherwise,
      * changes the position of the piece and returns true.

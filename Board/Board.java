@@ -18,6 +18,7 @@ public class Board implements Serializable{
         whitePlayer = new Player(Color.WHITE);
         whitePlayer.setBoard(this);
         blackPlayer = new Player(Color.BLACK);
+        blackPlayer.setBoard(this);
         initializeBoard();
     }
 
@@ -54,18 +55,12 @@ public class Board implements Serializable{
             }
         }
     }   
-    /*
+    
     private void placePiece(Piece piece) {
         Position pos = piece.getPosition();
         board[pos.getRow()][pos.getColumn()] = pos;
     }
-
-    private void placeAndAdd(Piece piece, Player player) {
-        placePiece(piece);
-        piece.move(piece.getPosition());
-        player.addPiece(piece);
-    }
-    */
+    
     public Player getPlayer(Color color){
         if(color == Color.WHITE){
             return getWhitePlayer();
@@ -83,34 +78,36 @@ public class Board implements Serializable{
     }
 
     public Piece getPiece(Position pos) {
-        Piece p = whitePlayer.findPieceAt(pos);
-        if (p == null) {
-            p = blackPlayer.findPieceAt(pos);
+        for (Piece p : whitePlayer.getPieces()){
+            if (p.getPosition().equals(pos)) return p;
         }
-        return p;
+        for (Piece p : blackPlayer.getPieces()){
+            if (p.getPosition().equals(pos)) return p;
+        }
+        return null;
     }
+
 
     public boolean movePiece(Position start, Position end) {
         Piece piece = getPiece(start);
 
-        if (piece == null) {
+        if (piece == null) return false;
+
+        if (!piece.possibleMoves().contains(end)){
             return false;
         }
 
         Piece target = getPiece(end);
 
-    if(piece.getColor() == Color.WHITE){
-        whitePlayer.makeMove(start, end);
-        if(target != null && target.getColor() == Color.BLACK){
-            blackPlayer.capturePiece(end);
+        if (target != null) {
+            if (target.getColor() == Color.WHITE){
+                whitePlayer.capturePiece(end);
+            } else {
+                blackPlayer.capturePiece(end);
+            }
         }
-    } else {
-        blackPlayer.makeMove(start, end);
-        if(target != null && target.getColor() == Color.WHITE){
-            whitePlayer.capturePiece(end);
-        }
-    }
 
+        piece.move(end);
         return true;
     }
 
@@ -165,7 +162,8 @@ public class Board implements Serializable{
     }
 
     public boolean isCheck(Position moveStart, Position moveEnd) {
-        Piece movingPiece = getPiece(moveStart);
+        return false;
+        /*Piece movingPiece = getPiece(moveStart);
         if (movingPiece == null) {
             return false;
         }
@@ -181,7 +179,7 @@ public class Board implements Serializable{
             }
         }
 
-        movingPiece.move(moveEnd);
+        if (!movingPiece.move(moveEnd)) return false;
         boolean result = isCheck(movingPiece.getColor());
         movingPiece.move(originalPosition);
 
@@ -194,6 +192,7 @@ public class Board implements Serializable{
         }
 
         return result;
+        */
     }
 
     public boolean isCheckmate() {
