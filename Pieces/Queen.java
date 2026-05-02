@@ -15,171 +15,48 @@ public class Queen extends Piece{
 
     public Queen(Player player, Position pos) {
         super(player, pos);
-        //TODO Auto-generated constructor stub
+        //TOD
     }
 
-    @Override
-    public ArrayList<Position> possibleMoves() {
-        ArrayList<Position> positions = new ArrayList<Position>();
-        Position check;
-        boolean capture = false;
+@Override
+public ArrayList<Position> possibleMoves() {
+    ArrayList<Position> moves = new ArrayList<>();
 
-        //Check all positions to the right, stopping when an error is thrown, or a piece is captured
-        for(int i = 1; i <= 8; i++){
+    int[] rowDir = {1, -1, 0, 0, 1, 1, -1, -1};
+    int[] colDir = {0, 0, 1, -1, 1, -1, 1, -1};
+
+    for (int d = 0; d < 8; d++) {
+        int i = 1;
+
+        while (true) {
             try {
-                check = new Position(this.getPosition().getRow() + i, (char)(this.getPosition().getColumn()));
-                if(getPlayer().findPieceAt(check) != null){
-                    throw new IllegalArgumentException();
-                }            
-                //Todo: If leaves in check, continue loop
-                //Todo: Check if there is a capture, set capture to that
-                positions.add(check);
-                if(capture){
+                Position next = new Position(
+                    getPosition().getRow() + rowDir[d] * i,
+                    (char)(getPosition().getColumn() + colDir[d] * i)
+                );
+
+                Piece piece = getPlayer().getBoard().getPiece(next);
+
+                if (piece == null) {
+                    if (!leavesKingInCheck(next)) {
+                        moves.add(next);
+                    }
+                } else {
+                    if (piece.getColor() != getColor() && !leavesKingInCheck(next)) {
+                        moves.add(next);
+                    }
                     break;
                 }
-            } catch (Exception e) {
+
+                i++;
+            } catch (IllegalArgumentException e) {
                 break;
             }
         }
-
-        //Checks all positions to the left
-        capture = false;
-        for(int i = 1; i <= 8; i++){
-            try {
-                check = new Position(this.getPosition().getRow() - i, (char)(this.getPosition().getColumn()));
-                if(getPlayer().findPieceAt(check) != null){
-                    throw new IllegalArgumentException();
-                }            
-                //Todo: If leaves in check, continue loop
-                //Todo: Check if there is a capture, set capture to that
-                positions.add(check);
-                if(capture){
-                    break;
-                }
-            } catch (Exception e) {
-                break;
-            }
-        }
-
-        //Check all positions north
-        capture = false;
-        for(int i = 1; i <= 8; i++){
-            try {
-                check = new Position(this.getPosition().getRow(), (char)(this.getPosition().getColumn() + i));
-                if(getPlayer().findPieceAt(check) != null){
-                    throw new IllegalArgumentException();
-                }            
-                //Todo: If leaves in check, continue loop
-                //Todo: Check if there is a capture, set capture to that
-                positions.add(check);
-                if(capture){
-                    break;
-                }
-            } catch (Exception e) {
-                break;
-            }
-        }
-
-        //Check all positions south
-        capture = false;
-        for(int i = 1; i <= 8; i++){
-            try {
-                check = new Position(this.getPosition().getRow(), (char)(this.getPosition().getColumn() - i));
-                if(getPlayer().findPieceAt(check) != null){
-                    throw new IllegalArgumentException();
-                }            
-                //Todo: If leaves in check, continue loop
-                //Todo: Check if there is a capture, set capture to that
-                positions.add(check);
-                if(capture){
-                    break;
-                }
-            } catch (Exception e) {
-                break;
-            }
-        }
-
-
-        capture = false;
-        //Four loops, checking each diagonal 8 spaces away. 
-        //If a space in invalid or a piece is encountered, break the loop early
-        //North-east
-        for(int i = 1; i <= 8; i++){
-            try {
-                check = new Position(this.getPosition().getRow() + i, (char)(this.getPosition().getColumn() + i));
-                if(getPlayer().findPieceAt(check) != null){
-                    throw new IllegalArgumentException();
-                }            
-                //Todo: If leaves in check, continue loop
-                //Todo: Check if there is a capture, set capture to that
-                positions.add(check);
-                if(capture){
-                    break;
-                }
-            } catch (Exception e) {
-                break;
-            }
-        }
-
-        //North-west
-        capture = false;
-        for(int i = 1; i <= 8; i++){
-            try {
-                check = new Position(this.getPosition().getRow() + i, (char)(this.getPosition().getColumn() - i));
-                if(getPlayer().findPieceAt(check) != null){
-                    throw new IllegalArgumentException();
-                }            
-                //Todo: If leaves in check, continue loop
-                //Todo: Check if there is a capture, set capture to that
-                positions.add(check);
-                if(capture){
-                    break;
-                }
-            } catch (Exception e) {
-                break;
-            }
-        }
-
-        //South-east
-        capture = false;
-        for(int i = 1; i <= 8; i++){
-            try {
-                check = new Position(this.getPosition().getRow() - i, (char)(this.getPosition().getColumn() + i));
-                if(getPlayer().findPieceAt(check) != null){
-                    throw new IllegalArgumentException();
-                }            
-                //Todo: If leaves in check, continue loop
-                //Todo: Check if there is a capture, set capture to that
-                positions.add(check);
-                if(capture){
-                    break;
-                }
-            } catch (Exception e) {
-                break;
-            }
-        }
-
-        //South-west
-        capture = false;
-        for(int i = 1; i <= 8; i++){
-            try {
-                check = new Position(this.getPosition().getRow() - i, (char)(this.getPosition().getColumn() + i));
-                if(getPlayer().findPieceAt(check) != null){
-                    throw new IllegalArgumentException();
-                }            
-                //Todo: If leaves in check, continue loop
-                //Todo: Check if there is a capture, set capture to that
-                positions.add(check);
-                if(capture){
-                    break;
-                }
-            } catch (Exception e) {
-                break;
-            }
-        }
-
-        return positions;
     }
+
+    return moves;
+}
 
     @Override
     public String toString(){

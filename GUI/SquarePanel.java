@@ -8,7 +8,7 @@ public class SquarePanel extends JButton {
 
     private int row, col;
     private JLabel imageLabel;
-    private final String PATH_TO_PIECE_VISUALS = "C:\\Users\\dalto\\OneDrive\\Desktop\\Programs\\Java\\Chess\\GUI\\PieceVisual\\";
+    private final String PATH_TO_PIECE_VISUALS = "GUI/PieceVisual/";
     private String colorPath;
     private String piecePath;
     private int size = 65;
@@ -38,22 +38,22 @@ public class SquarePanel extends JButton {
             //Switch case to set correct path
             switch (piece.toString().charAt(1)) {
                 case 'P':
-                    piecePath = "pawn.png\\";
+                    piecePath = "pawn.png";
                     break;
                 case 'N':
-                    piecePath = "knight.png\\";
+                    piecePath = "knight.png";
                     break;
                 case 'B':
-                    piecePath = "bishop.png\\";
+                    piecePath = "bishop.png";
                     break;
                 case 'R':
-                    piecePath = "rook.png\\";
+                    piecePath = "rook.png";
                     break;
                 case 'Q':
-                    piecePath = "queen.png\\";
+                    piecePath = "queen.png";
                     break;
                 case 'K':
-                    piecePath = "king.png\\";
+                    piecePath = "king.png";
                     break;
                 default:
                     break;

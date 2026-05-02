@@ -17,11 +17,11 @@ public class SettingsDialog extends JDialog {
         JButton lightColorBtn = new JButton("Change Light theme");
         JButton darkColorBtn = new JButton("Change Dark theme");
         JTextField firstColorLabel = new JTextField("Color for Player 1:");
-        JComboBox setFirstColor = new JComboBox<String>(new String[]
+        JComboBox<String> setFirstColor = new JComboBox<String>(new String[]
             {"White", "Blue", "Blue-Gray", "Cyan", "Gray", "Green", 
              "Orange", "Pink", "Purple", "Red", "Black", "Yellow"});
         JTextField secondColorLabel = new JTextField("Color for Player 2:");
-        JComboBox setSecondColor = new JComboBox<String>(new String[]
+        JComboBox<String> setSecondColor = new JComboBox<String>(new String[]
             {"Black", "Blue", "Blue-Gray", "Cyan", "Gray", "Green", 
              "Orange", "Pink", "Purple", "Red", "White", "Yellow"});
         JButton applyBtn = new JButton("Apply");

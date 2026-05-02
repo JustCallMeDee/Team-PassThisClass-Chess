@@ -89,10 +89,9 @@ public class BoardPanel extends JPanel {
         for (int row = 1; row < 9; row++){
             for (int col = 1; col < 9; col++){
                 Piece piece = board.getPiece(new Position(row, col));
-                if(piece != null && (Utils.Color)(piece.getColor()) == (Utils.Color.WHITE)){
+                if (piece != null && piece.getColor() == Utils.Color.WHITE) {
                     squares[row-1][col-1].setColor(player1Color);
-                }
-                else{
+                } else {
                     squares[row-1][col-1].setColor(player2Color);
                 }
                 squares[row-1][col-1].setPiece(piece);
