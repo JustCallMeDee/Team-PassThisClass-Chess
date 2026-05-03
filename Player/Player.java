@@ -40,44 +40,6 @@ public class Player implements Serializable{
     }
 
     /**
-     * Creates an Array list of Piece objects in standard position
-     * @param color The color of the pieces
-     * @return An array list of pieces in standard positions
-     */
-    
-    private ArrayList<Piece> createStandardPieceSetup(Color color) {
-        ArrayList<Piece> board = new ArrayList<Piece>();
-        if(color == Color.WHITE){
-            board.add(new King(this, new Position(1, 'E')));
-            board.add(new Queen(this, new Position(1, 'D')));
-            board.add(new Bishop(this, new Position(1, 'C')));
-            board.add(new Bishop(this, new Position(1, 'F')));
-            board.add(new Knight(this, new Position(1, 'B')));
-            board.add(new Knight(this, new Position(1, 'G')));
-            board.add(new Rook(this, new Position(1, 'A')));
-            board.add(new Rook(this, new Position(1, 'H')));
-            for(char i = 'A'; i <= 'H'; i++){
-                board.add(new Pawn(this, new Position(2, i)));
-            }
-        }
-        else{
-            board.add(new King(this, new Position(8, 'E')));
-            board.add(new Queen(this, new Position(8, 'D')));
-            board.add(new Bishop(this, new Position(8, 'C')));
-            board.add(new Bishop(this, new Position(8, 'F')));
-            board.add(new Knight(this, new Position(8, 'B')));
-            board.add(new Knight(this, new Position(8, 'G')));
-            board.add(new Rook(this, new Position(8, 'A')));
-            board.add(new Rook(this, new Position(8, 'H')));
-            for(char i = 'A'; i <= 'H'; i++){
-                board.add(new Pawn(this, new Position(7, i)));
-            }
-        }
-
-        return board;
-    }
-
-    /**
      * Gets the color of the player
      * @return The color of the player
      */

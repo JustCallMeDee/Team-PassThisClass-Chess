@@ -56,11 +56,6 @@ public class Board implements Serializable{
         }
     }   
     
-    private void placePiece(Piece piece) {
-        Position pos = piece.getPosition();
-        board[pos.getRow()][pos.getColumn()] = pos;
-    }
-    
     public Player getPlayer(Color color){
         if(color == Color.WHITE){
             return getWhitePlayer();
